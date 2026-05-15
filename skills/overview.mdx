@@ -1,54 +1,83 @@
 ---
-title: "Skills overview: how Galagos selects and applies tools"
-description: "Discover how skills power every Galagos analysis — from automatic tool selection and workflow orchestration to custom lab protocols and team libraries."
+title: "Skills overview"
+description: "Skills are short, plain-English notes that tell the agent how a particular kind of work should be done. Browse the 250+ catalogue, attach a handful per project, save a conversation as a Skill, write your own from chat."
 ---
 
-Skills are reusable building blocks that tell Galagos how to use specific bioinformatics software or orchestrate multi-step scientific procedures. Every time you run an analysis, Galagos draws on one or more skills to plan its approach, select the right tools, and apply the right parameters — without requiring you to configure anything manually.
+A Skill is a short note, in plain English, that tells the agent how you want a particular kind of work done. The agent reads attached Skills before running and treats them as guidance — closer to a brief for a new lab member than to code.
 
-## Two types of skills
+Galagos ships with a catalogue of **250+ prebuilt Skills** covering the most common bioinformatics tools and workflows. You attach a handful per project, toggle them on or off as you go, and write your own when the catalogue doesn't quite fit.
 
-<Columns cols={2}>
-  <Card title="Tool skills" icon="wrench">
-    Teach Galagos how to use a specific piece of software. A Tool skill encodes the tool's interface, recommended parameters, and how to interpret its output. Examples include AlphaFold for protein structure prediction, DESeq2 for differential expression, and BLAST for sequence similarity search.
-  </Card>
-  <Card title="Workflow skills" icon="diagram-project">
-    Orchestrate a complete multi-step scientific procedure. A Workflow skill chains together multiple tools in a defined order. Examples include a standard RNA-seq pipeline (alignment → quantification → differential expression analysis), a literature review, or a replication study.
-  </Card>
-</Columns>
+## Per-project, toggleable
 
-## Automatic discovery
+Skills live at the project level. The wrench icon in a project's right sidebar opens the Skills panel, which lists every Skill attached to that project with a toggle next to each. The panel header shows how many are enabled out of the total (for example, *"4 of 7 enabled"*).
 
-You don't need to know which skills exist or manually select them before running an analysis. Galagos includes a skill-finder that indexes the full skill catalogue and runs in the background while you type your prompt. As you describe your research question, it proactively identifies and applies the most relevant skills — so the right tools are always chosen automatically.
+Switching a toggle takes effect on the next prompt. When the agent uses a Skill, it appears as a step in the Steps list — visible proof the toggle worked.
 
-<Info>
-  The skill-finder operates continuously as you type. By the time you submit your prompt, Galagos has already identified the most relevant skills for your analysis.
-</Info>
+<Tip>
+  Start with two or three Skills per project, not twenty. Focused guidance produces better results than a long list of competing instructions.
+</Tip>
 
-## Pre-built skill catalogue
+## Adding from the catalogue
 
-Galagos ships with **207 pre-built skills** covering the most widely used tools and workflows in bioinformatics — from structural biology and single-cell analysis to variant calling and sequence alignment. These skills are maintained and updated by the Galagos team.
+Click **+ Add** in the Skills panel to open the catalogue. The catalogue:
 
-## Custom skills
+- Search live-filters as you type — typing *"alpha"* surfaces AlphaFold, AlphaFold-Database, alphagenome.
+- Cards show the Skill name and a one-line description. Click any card for the full text.
+- Categories group Skills by domain: Genomics, Single-Cell, Drug Discovery, Protein Structure, Proteomics, Chemistry, Clinical, and more.
 
-If you have a preferred analysis approach — specific tools, parameter settings, or interpretation logic your lab relies on — you can capture it as a custom skill. Custom skills are private to your account and reusable across any project.
+<Card title="Browse the catalogue" icon="layer-group" href="/skills/pre-built-skills">
+  Example Skills organised by category.
+</Card>
 
-<Note>
-  Custom skills are private to your account. Team Skill Libraries, which will let you share skills across your organization, are coming soon.
-</Note>
+## Save a conversation as a Skill
 
-## Team Skill Libraries
+After a successful run, you can convert the conversation itself into a reusable Skill. Two routes:
 
-<Info>
-  **Coming soon.** Team Skill Libraries will let you share skills across your team or organization. Proven protocols stay in the platform when people leave, and new team members can run your lab's standard analyses from day one.
-</Info>
+- **From a suggestion** — after a handful of completed responses in a session, the agent often offers *"Save this as a Skill?"*. Click it to capture the workflow.
+- **From the Skills panel** — click **Create**. Describe what you want the Skill to do in plain English; the agent drafts it from the recent conversation and asks you to confirm.
 
-## Next steps
+Saved Skills land in **My Skills**, your personal library. They're available from every project you create.
+
+## Workspace-level Skills
+
+In a team workspace, owners and admins can configure Skills for the whole team:
+
+- **Pinned** Skills are pre-attached when a member creates a new project.
+- **Required** Skills cannot be toggled off — useful for non-negotiable QC thresholds, citation rules, or privacy policies.
+
+Members can always attach additional Skills inside their project. See [Workspaces](/concepts/workspaces) for the full picture.
+
+## Custom Skills you write yourself
+
+If a workflow doesn't quite fit the catalogue, write a Skill in plain English:
+
+- *"Whenever I upload gene expression data, log-transform counts, filter out genes with zero reads in more than half the samples, and include both fold change and adjusted p-value in the output."*
+- *"For every phylogenetic tree, root on the outgroup I specify, colour branches by host species, and scale by substitutions per site."*
+
+The agent saves your text as a Skill in the project. **Save to My Skills** promotes it to your personal library.
+
+<Card title="Write a custom Skill" icon="gear" href="/skills/custom-skills">
+  Step-by-step instructions for creating a Skill from chat.
+</Card>
+
+## Sharing Skills
+
+Skills can be exported as a small file and imported into another workspace or shared with a colleague. Shared team libraries are on the way for teams that want a single curated set across many workspaces.
+
+## A few tips
+
+- **Brief like a new lab member, not a computer.** Tell the Skill *why* and *when*, not just *what*.
+- **One sentence is enough to start.** Refine after the first run shows you what's missing.
+- **Update Skills when your approach changes.** Six months later, your defaults may not match what you wrote.
+- **Don't over-attach.** Two or three Skills per project beats ten that pull in different directions.
+
+## Related pages
 
 <CardGroup cols={2}>
-  <Card title="Pre-built skills" icon="layer-group" href="/skills/pre-built-skills">
-    Browse the 207 pre-built skills organized by category, including structural biology, RNA-seq, variant analysis, and more.
+  <Card title="Pre-built Skills" icon="layer-group" href="/skills/pre-built-skills">
+    Examples from each catalogue category.
   </Card>
-  <Card title="Custom skills" icon="gear" href="/skills/custom-skills">
-    Learn how to create a custom skill that captures your lab's preferred tools, parameters, and pipeline steps.
+  <Card title="Custom Skills" icon="gear" href="/skills/custom-skills">
+    Write a Skill from chat in plain English.
   </Card>
 </CardGroup>

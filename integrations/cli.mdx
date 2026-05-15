@@ -1,0 +1,97 @@
+---
+title: "Galagos CLI: scripted access to your projects"
+description: "Use the Galagos command-line client to authenticate, sync files, and trigger analyses from your terminal — useful for scripted workflows and HPC integration."
+---
+
+The Galagos CLI is an optional command-line client for the platform. It authenticates against your Galagos account with a personal access token, lets you upload and download files, and triggers analyses from a terminal. Most users never need it — the web interface covers everything — but if you script your workflows or integrate with an institutional HPC environment, the CLI is the entry point.
+
+## When to use the CLI
+
+<CardGroup cols={2}>
+  <Card title="Bulk uploads" icon="upload">
+    Push hundreds of FASTQ files from a sequencing run to a project without clicking through the browser uploader.
+  </Card>
+  <Card title="Scripted workflows" icon="terminal">
+    Wire Galagos into shell scripts, Snakemake or Nextflow stages, or institutional pipelines that already run from a terminal.
+  </Card>
+  <Card title="HPC integration" icon="server">
+    Trigger an analysis from a login node or a scheduled job on an institutional cluster.
+  </Card>
+  <Card title="CI and reproducibility" icon="rotate">
+    Re-run a defined analysis on a schedule, or as part of an automated reproducibility check.
+  </Card>
+</CardGroup>
+
+## Generating an access token
+
+The CLI authenticates with a personal access token you mint from your profile page. Tokens carry your account's permissions and let you read and write any workspace you can access through the web app.
+
+<Steps>
+  <Step title="Open your profile">
+    Click your account avatar in the top-right corner and choose **Profile**.
+  </Step>
+  <Step title="Scroll to API tokens">
+    Find the **API token** section on the profile page. If you have not generated a token before, the section will be empty.
+  </Step>
+  <Step title="Generate a token">
+    Click **Generate token**. The full token is shown once, immediately after generation, and remains visible for **five minutes** before being hidden.
+  </Step>
+  <Step title="Copy the token now">
+    Copy the token to your clipboard or a secure password manager during the five-minute window. After that, only the token's prefix is visible and the full value cannot be recovered.
+  </Step>
+  <Step title="Regenerate if needed">
+    If you lose a token, click **Regenerate**. The old token is revoked immediately. Any device using the previous token will need to re-authenticate.
+  </Step>
+</Steps>
+
+<Warning>
+  Treat your token like a password. It grants the same level of access as a logged-in browser session. Don't commit it to version control, paste it into shared chat channels, or store it in an unencrypted file.
+</Warning>
+
+## Installing the CLI
+
+The CLI is distributed as a standalone Python package. Installation and command details live in the CLI's own repository.
+
+<Card title="Galagos CLI repository" icon="github" href="https://github.com/galagos-science/cli">
+  Installation instructions, command reference, and release notes.
+</Card>
+
+After installing, authenticate once with:
+
+```
+galagos auth login
+```
+
+Paste your access token when prompted. The CLI stores it locally and uses it for every subsequent command.
+
+## What you can do from the CLI
+
+The CLI mirrors the most common project operations available in the web app:
+
+- Upload one or many files into a project.
+- Download project outputs to your local machine.
+- List projects, sessions, and files.
+- Trigger a new analysis by sending a prompt to a session.
+
+The web app is still the right place for interactive exploration, viewer-based inspection, and managing workspace settings. The CLI is for the parts of the workflow that benefit from being automated.
+
+## Rotating or revoking access
+
+If a token is exposed — or someone leaves the lab — rotate immediately:
+
+1. Open **Profile → API token**.
+2. Click **Regenerate**. The previous token is revoked the moment the new one is issued.
+3. Distribute the new token to any machines that need to keep CLI access.
+
+For a stolen or compromised token, regenerate first, then audit recent activity in the workspace audit log.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Account setup" icon="user" href="/account-setup">
+    Register, choose a plan, and configure your account before generating a token.
+  </Card>
+  <Card title="Workspaces" icon="users" href="/concepts/workspaces">
+    The audit log records every action a CLI token takes inside a workspace.
+  </Card>
+</CardGroup>

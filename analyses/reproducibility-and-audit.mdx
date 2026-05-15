@@ -1,0 +1,116 @@
+---
+title: "Reproducibility and audit: defending every result"
+description: "Galagos records every decision, every command, and every output for every run — so a reviewer, a collaborator, or future-you can verify what was done, why, and re-run it from scratch."
+---
+
+A useful bioinformatics result is one you can defend. Galagos is built around that: every run records the agent's reasoning, every command it executed, every package it installed, every Skill it consulted, and every decision it made along the way. When a reviewer asks "why did you choose limma-voom over DESeq2?" or "what version of GATK did you use?", the answer is one click away.
+
+## Three surfaces for three questions
+
+Most reproducibility questions fall into one of three categories. Galagos exposes a separate surface for each.
+
+<CardGroup cols={2}>
+  <Card title="Was the analysis parameterised correctly?" icon="list-check">
+    Open the **reasoning panel** (right side of the chat) and the **Steps list**. The reasoning panel shows the plan in plain English. The Steps list shows every shell call, script, package install, and Skill activation.
+  </Card>
+  <Card title="Was the right person doing this?" icon="user-shield">
+    Open the workspace **Audit log**. Every workspace action — project created, member invited, Skill pinned, library file uploaded — is recorded with actor and timestamp.
+  </Card>
+  <Card title="Can I re-run this elsewhere?" icon="box-archive">
+    **Export the project** as a single archive. It contains the chat history, the input files, every script the agent wrote, every output, and an environment record listing installed packages with versions.
+  </Card>
+  <Card title="Did the agent catch its own limits?" icon="flag">
+    Every completed run includes an auto-written **Limitations paragraph** that flags caveats — sample-size constraints, batch effects, mapping coverage, normalisation transparency.
+  </Card>
+</CardGroup>
+
+## The agent's reasoning
+
+Before compute starts on a non-trivial analysis, the agent writes a plain-English plan in the right panel. You see the comparison it intends to run, the tool it intends to use, and the parameters it expects to set — *before* it commits CPU time to the wrong thing.
+
+This is the moment to catch a misread of your data. "I see two conditions in the metadata, treated and control, n=4 per group. I'll run DESeq2 with default size-factor normalisation and report genes with adjusted p < 0.05 and |log2FC| > 1." If the agent says "n=3 per group" but you have four replicates, fix it now.
+
+<Tip>
+  Read the plan before walking away. A one-line correction at this stage saves minutes or hours of misdirected compute downstream.
+</Tip>
+
+## The Steps list
+
+While a run is in progress and after it completes, the Steps list shows the unedited record of what the agent actually did:
+
+- Every shell command, with its working directory and exit code.
+- Every script the agent wrote — the agent writes real R and Python, not hidden glue.
+- Every package install, captured with version.
+- Every Skill consultation, shown as a discrete step.
+- Stdout and stderr for each command.
+
+Click any step to expand it and see the exact text. The Steps list answers "what version of bcftools" and "did the alignment really finish on chromosome 22" without anyone needing to remember.
+
+## Critical-decision interrupts
+
+For decisions that change the result, the agent pauses and asks you to choose. The most common example: DESeq2 versus limma-voom for differential expression with low replicate counts. The agent surfaces both options, explains the trade-off in one paragraph, and offers three responses:
+
+- **Pick the suggested answer** — the agent's recommendation, framed for your dataset.
+- **Type a custom answer** — for example, *"use limma-voom, but with eBayes shrinkage"*.
+- **Dismiss** — the agent proceeds with its best guess. The dismissal is recorded.
+
+Whichever route you take, the decision *and the reasoning behind it* are recorded in the Steps list. Six months later, the chat history still answers the question "why limma-voom?".
+
+## The auto-written Limitations paragraph
+
+Every completed run ends with a Limitations paragraph the agent writes about its own output. Typical content:
+
+- Sample-size caveats ("with n=3 per group, single-gene power is limited; treat ranked gene lists as exploratory").
+- Batch information ("samples were processed across two flowcells; no batch correction was applied").
+- Normalisation transparency ("counts were size-factor normalised by DESeq2; no separate library-size adjustment").
+- Probe or mapping caveats ("3.1% of reads mapped to multiple loci and were discarded").
+
+This isn't disclaimer boilerplate — it is written from the run that just happened, with numbers from the data. Read it before sharing the result with a co-author.
+
+## Workspace audit log
+
+The reasoning and Steps record what *the agent* did inside a project. The workspace audit log records what *people* did across the workspace:
+
+- Workspace and project creation.
+- Member invites and role changes.
+- Library uploads.
+- Skill pinning and Required-flag changes.
+- LLM endpoint configuration.
+
+Each entry shows the actor, the action, and the timestamp. Filter by event type and export to CSV when you need a record for a review or audit.
+
+## Reproducibility archive
+
+When you need to hand the analysis to someone else — a journal, a clinical collaborator, a regulator — export the project as a single archive. The archive contains:
+
+- The complete chat history.
+- All input files (or the references that point to them).
+- Every script the agent wrote during the run.
+- All outputs — figures, tables, intermediate files.
+- The environment record: installed packages with versions.
+
+A recipient with a fresh Galagos workspace (or a local environment with the matching package versions) can unpack and re-run the analysis from scratch.
+
+## A few tips
+
+- **Read the plan, not just the result.** The plan is where assumptions are made; the result is where assumptions become hard to undo.
+- **Trust the Limitations paragraph.** It is often the first place a reviewer will look.
+- **Export early.** You don't have to wait until publication — generating an archive after a milestone run preserves the exact state for later.
+- **Use the audit log proactively.** A 30-second skim before a review meeting beats hunting through Slack for who-changed-what.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Running an analysis" icon="flask" href="/analyses/running-an-analysis">
+    The full conversation loop from question to summarised result.
+  </Card>
+  <Card title="Session persistence" icon="clock-rotate-left" href="/analyses/session-persistence">
+    How long-running jobs keep going while the browser is closed.
+  </Card>
+  <Card title="Workspaces" icon="users" href="/concepts/workspaces">
+    Where the audit log lives and how member roles map to it.
+  </Card>
+  <Card title="Visualisations and reports" icon="chart-bar" href="/analyses/visualizations-and-reports">
+    The outputs the agent produces alongside the Steps list.
+  </Card>
+</CardGroup>

@@ -1,76 +1,127 @@
 ---
-title: "Pre-built skills: 207 bioinformatics tools and workflows"
-description: "Galagos ships with 207 pre-built skills covering structural biology, single-cell analysis, RNA-seq, variant calling, sequence analysis, and more."
+title: "Pre-built Skills"
+description: "Galagos ships with 250+ pre-built Skills covering protein structure, single-cell, RNA-seq, variant analysis, chemistry, drug discovery, and clinical workflows. Browse, attach, toggle."
 ---
 
-Galagos ships with 207 pre-built skills covering the most common tools and workflows in bioinformatics. Each skill encodes how to run a specific tool or procedure — including parameter defaults, input/output handling, and result interpretation — so Galagos can apply it correctly without any manual configuration from you.
+The catalogue ships with **250+ prebuilt Skills** covering the most common bioinformatics tools and workflows. Each Skill encodes how a tool or procedure should be run — parameters, input/output handling, interpretation — so the agent can apply it correctly without manual configuration.
 
 <Tip>
-  You don't need to browse or select skills manually. The skill-finder monitors your prompt as you type and automatically applies the most relevant skills for your analysis. Browse the catalogue in your project workspace if you want to see what's available or verify which skills will be used.
+  You do not need to browse the catalogue before starting an analysis. The agent suggests relevant Skills as you describe your question. Browse when you want to see what's available or pre-attach Skills before running.
 </Tip>
 
-## Structural biology
+Open the catalogue from the wrench icon in a project's right sidebar, then click **+ Add**. Search filters as you type; each card has a one-line description and a click-through for the full text.
 
-Tools for predicting, modelling, and analysing protein and molecular structures.
+## Structural biology and protein design
 
-| Skill | Description |
-|---|---|
-| **AlphaFold** | Predict protein structure from amino acid sequence using deep learning |
-| **RoseTTAFold** | Protein structure prediction with three-track neural network architecture |
-| **AutoDock Vina** | Molecular docking to predict how small molecules bind to protein targets |
-
-## Single-cell analysis
-
-Tools for processing and interpreting single-cell RNA sequencing data.
+Predict, model, and analyse protein and macromolecular structures.
 
 | Skill | Description |
-|---|---|
-| **Scanpy** | Python-based single-cell analysis including clustering, trajectory inference, and visualisation |
-| **Seurat** | R-based single-cell RNA-seq analysis with extensive integration and annotation support |
-| **CellRanger** | Align and quantify 10x Genomics single-cell sequencing data |
+| --- | --- |
+| **AlphaFold** | Predict protein structure from amino acid sequence using deep learning. |
+| **AlphaFold-Database** | Look up precomputed AlphaFold predictions for known proteins. |
+| **ColabFold** | Lighter-weight AlphaFold-compatible structure prediction. |
+| **RoseTTAFold** | Three-track neural network for protein structure prediction. |
+| **AutoDock Vina** | Molecular docking — predict how small molecules bind protein targets. |
 
-## RNA-seq
+## Single-cell biology
 
-Tools for aligning, quantifying, and performing differential expression analysis on bulk RNA-seq data.
-
-| Skill | Description |
-|---|---|
-| **STAR** | Fast splice-aware RNA-seq read alignment to a reference genome |
-| **HISAT2** | Graph-based alignment of sequencing reads with splice-site awareness |
-| **featureCounts** | Read counting for genes and genomic features after alignment |
-| **DESeq2** | Differential expression analysis using negative binomial distribution modelling |
-| **edgeR** | Differential expression analysis for count data with empirical Bayes estimation |
-
-## Variant analysis
-
-Tools for calling, annotating, and filtering genetic variants.
+Process and interpret single-cell RNA sequencing data.
 
 | Skill | Description |
-|---|---|
-| **GATK HaplotypeCaller** | Call germline SNPs and indels via local de-novo assembly of haplotypes |
-| **bcftools** | Utilities for variant calling, filtering, and manipulation of VCF and BCF files |
-| **SnpEff** | Annotate and predict the functional effects of genetic variants |
+| --- | --- |
+| **Scanpy** | Python toolkit for clustering, trajectory inference, and visualisation. |
+| **Seurat** | R toolkit with integration, annotation, and multimodal support. |
+| **CellRanger** | Align and quantify 10x Genomics single-cell sequencing data. |
 
-## Sequence analysis
+## RNA-seq and differential expression
 
-Tools for searching, aligning, and comparing biological sequences.
-
-| Skill | Description |
-|---|---|
-| **BLAST** | Search sequence databases for regions of local similarity |
-| **HMMER** | Profile hidden Markov models for sensitive sequence homology searches |
-| **Clustal Omega** | Multiple sequence alignment for proteins and nucleotides |
-
-## Workflow skills
-
-End-to-end multi-step procedures that chain multiple tools together.
+Align, quantify, and run differential expression on bulk RNA-seq.
 
 | Skill | Description |
-|---|---|
-| **Standard RNA-seq pipeline** | Full pipeline from raw reads to differential expression: alignment → quantification → DEA |
-| **Literature review** | Structured review and synthesis of published findings relevant to your research question |
-| **Replication study** | Reproduce the analytical workflow from a published study against your own data |
+| --- | --- |
+| **STAR** | Fast splice-aware RNA-seq alignment to a reference genome. |
+| **HISAT2** | Graph-based alignment with splice-site awareness. |
+| **Bowtie2** | Fast short-read alignment for DNA and RNA. |
+| **featureCounts** | Read counting for genes and genomic features. |
+| **DESeq2** | Differential expression with negative-binomial modelling. |
+| **pydeseq2** | Python implementation of DESeq2 for end-to-end notebooks. |
+| **edgeR** | Differential expression with empirical Bayes estimation. |
+
+## Variant analysis and genomics
+
+Call, annotate, and filter genetic variants.
+
+| Skill | Description |
+| --- | --- |
+| **GATK HaplotypeCaller** | Call germline SNPs and indels via local de-novo haplotype assembly. |
+| **bcftools** | Variant calling, filtering, and manipulation for VCF and BCF. |
+| **SnpEff** | Annotate and predict the functional effects of variants. |
+| **alphagenome** | Genome-aware Skill for variant interpretation tasks. |
+
+## Sequence analysis and phylogenetics
+
+Search, align, and compare biological sequences and trees.
+
+| Skill | Description |
+| --- | --- |
+| **BLAST** | Search sequence databases for regions of local similarity. |
+| **HMMER** | Profile hidden Markov models for sensitive homology searches. |
+| **Clustal Omega** | Multiple sequence alignment for proteins and nucleotides. |
+| **IQ-TREE** | Maximum-likelihood phylogenetic inference with model selection. |
+
+## Chemistry and small molecules
+
+Work with chemical structures, compound libraries, and drug-target interactions.
+
+| Skill | Description |
+| --- | --- |
+| **RDKit** | Cheminformatics toolkit — descriptors, similarity, fingerprints. |
+| **ChEMBL** | Look up bioactivity and target data for small molecules. |
+
+## Workflow Skills
+
+Multi-step procedures that chain tools together.
+
+| Skill | Description |
+| --- | --- |
+| **Standard RNA-seq pipeline** | Raw reads to differential expression: alignment → quantification → DEA. |
+| **Literature review** | Structured review and synthesis of recent publications relevant to your question. |
+| **Replication study** | Reproduce a published analytical workflow against your own data. |
 
 <Note>
-  The categories and examples above represent a selection of the full catalogue. Galagos includes 207 pre-built skills in total. To browse the complete list, open your project workspace and navigate to the **Skills** section.
+  The examples on this page are a selection of the full catalogue, which includes 250+ Skills across Genomics & Pipelines, Drug Discovery, Single-Cell Biology, Chemistry & Molecules, Protein Structure & Design, Proteomics & Metabolomics, and Clinical & Medical. Open the catalogue inside a project to see the complete list.
 </Note>
+
+## How to use Skills in a project
+
+<Steps>
+  <Step title="Open the Skills panel">
+    Click the wrench icon in the project's right sidebar.
+  </Step>
+  <Step title="Attach what you need">
+    Click **+ Add** to open the catalogue. Search or browse, then click **+ Add** on a card to attach it.
+  </Step>
+  <Step title="Toggle on the active ones">
+    The panel header shows the active count (e.g. *"3 of 5 enabled"*). Toggle a Skill on; the next prompt picks it up.
+  </Step>
+  <Step title="Verify in the Steps list">
+    When the agent consults a Skill it logs a step like *"Enable pydeseq2 Skill"*. Open the Steps list to confirm.
+  </Step>
+</Steps>
+
+## A few tips
+
+- **Don't over-attach.** Two or three Skills per project is usually enough. Twenty competing Skills produce muddier results, not better ones.
+- **Read the description before attaching.** A Skill is a brief — read it to make sure it matches what you want.
+- **Use workflow Skills for repeatable pipelines.** A workflow Skill is far more reliable than re-describing the same five-step procedure each time.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Skills overview" icon="wand-magic-sparkles" href="/skills/overview">
+    What Skills are and how the panel works.
+  </Card>
+  <Card title="Custom Skills" icon="gear" href="/skills/custom-skills">
+    Write your own when the catalogue doesn't fit.
+  </Card>
+</CardGroup>

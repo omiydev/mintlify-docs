@@ -1,0 +1,82 @@
+---
+title: "Memory: long-term context that travels between sessions"
+description: "Memory in Galagos is an opt-in store of facts about how your team works — strain panels, naming conventions, export formats — that the agent consults before every analysis."
+---
+
+Memory is an opt-in store of long-term facts about how you and your team work. The agent consults memory before each run, so you don't need to repeat the same conventions, file-format preferences, or methodological caveats in every prompt.
+
+Memory lives at the workspace level. Anything you store is visible to other members of the same workspace, editable, and removable at any time.
+
+## What to put in memory
+
+Memory works best for short, stable facts that change how an analysis should be run — not for transient state from a single session.
+
+Good memory entries:
+
+- *"We always export supplementary tables as TSV, not CSV."*
+- *"For mouse models, use GRCm39 unless the dataset specifies otherwise."*
+- *"Our strain panel is BL6, BALB/c, and 129S1 — always include all three in PCA plots."*
+- *"For DESeq2, default to a 10% FDR threshold for our preliminary reports."*
+- *"Cite the 2024 lab style guide when generating methods sections."*
+
+Bad memory entries — these belong in a project, not in memory:
+
+- File contents or sample-level data.
+- Anything specific to a single experiment.
+- Anything that changes week to week.
+
+## Adding a memory entry
+
+The simplest way to add an entry is to tell the agent in plain English:
+
+```
+Remember that we always export supplementary tables as TSV, not CSV.
+```
+
+The agent confirms the entry, writes it to the workspace memory, and applies it from then on.
+
+You can also manage entries directly:
+
+<Steps>
+  <Step title="Open the workspace Memory tab">
+    Click **Memory** in the workspace sidebar.
+  </Step>
+  <Step title="Search or browse">
+    Existing entries appear as a searchable list. Each entry shows the fact, the kind (manual note, derived from a conversation, derived from a tool output), and the date it was created.
+  </Step>
+  <Step title="Edit or remove">
+    Click any entry to view its detail. From here you can rewrite it inline or delete it. There is no version history — edits take effect immediately.
+  </Step>
+</Steps>
+
+<Tip>
+  Keep entries to one sentence. The agent reads memory before every run, so concise entries are faster to process and easier for teammates to scan.
+</Tip>
+
+## How the agent uses memory
+
+Before starting a run, the agent reads the relevant memory entries and treats them as binding constraints — the same way it would treat an attached Skill. A memory entry that says "always use TSV" makes the agent default to TSV for any supplementary file it produces, even if a teammate's prompt is silent on the format.
+
+Memory is consulted, not enforced. If a prompt is explicit ("export this one as CSV"), the prompt wins. The memory entry still applies to the next request.
+
+## Quota
+
+Memory is capped at **5,000 entries per workspace**. The cap is generous for normal team usage — entries are sentences, not documents — and is visible as a quota bar in the Memory tab. If you approach the limit, look for redundant or outdated entries and remove them.
+
+## A few tips
+
+- **Promote, don't repeat.** If you find yourself typing the same caveat into three different prompts, move it to memory.
+- **Review periodically.** Memory entries that were true six months ago may not be true now. A 10-minute monthly skim keeps the store tidy.
+- **Be specific about scope.** "For mouse RNA-seq, use GRCm39" is more useful than "Use GRCm39" — the agent applies entries to the situations they describe.
+- **Memory is shared.** Anything you write is visible to every member of the workspace. Don't put anything in memory that you wouldn't say in a lab meeting.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Workspaces" icon="users" href="/concepts/workspaces">
+    The nine workspace tabs and where Memory fits among them.
+  </Card>
+  <Card title="Skills" icon="wand-magic-sparkles" href="/concepts/skills">
+    Reusable building blocks the agent applies during a run.
+  </Card>
+</CardGroup>

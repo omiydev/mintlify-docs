@@ -1,52 +1,120 @@
 ---
-title: "Supported file formats for Galagos analyses"
-description: "A complete reference of every file format Galagos can ingest, with extensions, typical use cases, and notes on compression and tool compatibility."
+title: "Supported file formats"
+description: "Every file format Galagos can ingest and inspect — sequencing data, structures, alignments, variant calls, tabular data, notebooks, and documents — with notes on viewers, compression, and tool compatibility."
 ---
 
-Galagos natively handles five bioinformatics file formats. Each format is parsed and validated when you upload it, so the tools Galagos selects during an analysis always receive correctly structured input.
+Galagos opens a wide range of bioinformatics, tabular, and document formats natively. Drop any of them into a project and the right viewer launches automatically; the same files become inputs to analyses without any conversion.
 
-## Format reference
+This page is a single reference for every format the platform handles. If you are looking for an interactive walkthrough of the viewers themselves, see [Visualisations and reports](/analyses/visualizations-and-reports).
+
+## Sequencing reads and alignments
 
 | Format | Extension | Use case | Notes |
 |--------|-----------|----------|-------|
-| CSV | `.csv` | General tabular data: gene expression count matrices, sample metadata, differential expression results | Column headers are required. Galagos infers the delimiter; standard comma separation is recommended. |
-| FASTQ | `.fastq`, `.fastq.gz` | Raw sequencing reads from RNA-seq, whole-genome sequencing (WGS), and whole-exome sequencing (WES) | Gzip-compressed `.fastq.gz` files are preferred — they upload faster and consume less storage. Paired-end reads should be uploaded as separate R1 and R2 files. |
-| VCF | `.vcf`, `.vcf.gz` | Variant call files containing SNPs, indels, and structural variants from genomic samples | Both uncompressed and bgzipped (`.vcf.gz`) files are accepted. Galagos supports VCF 4.1 and 4.2. |
-| BAM | `.bam` | Aligned sequencing reads produced by aligners such as BWA-MEM, STAR, or HISAT2 | BAM files must be coordinate-sorted. Galagos accepts BAM files with or without an accompanying `.bai` index; if no index is present, one is generated automatically. |
-| H5AD | `.h5ad` | Single-cell RNA-seq and multi-omics data in AnnData format, used by Scanpy and related Python tools | H5AD is the recommended format for single-cell workflows. Galagos preserves `obs`, `var`, `obsm`, and `uns` slots during processing. |
+| FASTQ | `.fastq`, `.fq`, `.fastq.gz` | Raw sequencing reads from RNA-seq, WGS, WES, scRNA-seq | Gzipped files are preferred. Paired-end reads upload as separate R1/R2 files. |
+| FASTA | `.fasta`, `.fa`, `.fna`, `.faa` | Reference sequences and assemblies (DNA, RNA, protein) | Opens in the sequence browser with optional quality strips. |
+| GenBank | `.genbank`, `.gb`, `.gbk` | Annotated sequence records | Annotations are parsed and shown alongside the sequence. |
+| BAM | `.bam` | Aligned sequencing reads | Coordinate-sorted required. Index (`.bai`) generated if missing. Opens in IGV-style genome browser or alignment summary table. |
 
-## Tips for choosing the right format
+## Variants, intervals, and signal tracks
+
+| Format | Extension | Use case | Notes |
+|--------|-----------|----------|-------|
+| VCF | `.vcf`, `.vcf.gz` | Variant calls (SNPs, indels, structural variants) | VCF 4.1 and 4.2. Switch between genome-browser track and sortable variant table with one click. |
+| BED | `.bed`, `.narrowpeak`, `.broadpeak` | Genomic intervals — peaks, regions of interest, panels | Opens in the genomic-interval table; tracks load in the genome browser when paired with a BAM or BigWig. |
+| GFF / GTF | `.gff`, `.gff3`, `.gtf` | Gene models and feature annotations | Hierarchical feature display; works as a track in the genome browser. |
+| BigWig | `.bw`, `.bigwig` | Coverage and signal tracks | Opens in the genome browser; also viewable as a coverage table. |
+
+## Single-cell and tabular data
+
+| Format | Extension | Use case | Notes |
+|--------|-----------|----------|-------|
+| H5AD | `.h5ad` | Single-cell expression in AnnData format | Preserves `obs`, `var`, `obsm`, and `uns` slots. Recommended for Scanpy workflows. |
+| CSV | `.csv` | Count matrices, metadata, results tables | Comma delimiter recommended; column headers required. |
+| TSV | `.tsv` | Same as CSV with tab delimiter | Preferred for supplementary tables. |
+
+Both CSV and TSV files open as interactive, sortable, searchable tables.
+
+## Structures, sequences for structural biology
+
+| Format | Extension | Use case | Notes |
+|--------|-----------|----------|-------|
+| PDB | `.pdb`, `.ent` | Protein and macromolecular structures | Opens in the 3D structure viewer. Paste a PDB ID into the chat to fetch directly. |
+| mmCIF / CIF | `.cif`, `.mmcif` | Crystallographic structures (modern PDB exchange format) | Same viewer as PDB. |
+| PQR | `.pqr` | Protein structure with charge and radius | Same viewer as PDB. |
+
+## Small molecules
+
+| Format | Extension | Use case | Notes |
+|--------|-----------|----------|-------|
+| SDF | `.sdf` | Small-molecule structure files (one or many molecules) | Opens in the molecule viewer with stick/sphere/cartoon rendering. |
+| MOL | `.mol`, `.mol2` | Single molecule structure | Same viewer. |
+| XYZ | `.xyz` | Atom coordinate listings | Same viewer. |
+
+## Phylogenetic trees
+
+| Format | Extension | Use case | Notes |
+|--------|-----------|----------|-------|
+| Newick | `.nwk`, `.newick`, `.tree` | Phylogenetic trees | Interactive viewer with horizontal and radial layouts; branch lengths preserved. |
+| NHX | `.nhx` | Extended Newick with annotations | Same viewer as Newick. |
+
+## Notebooks and documents
+
+| Format | Extension | Use case | Notes |
+|--------|-----------|----------|-------|
+| Jupyter notebook | `.ipynb` | Rendered notebooks with code, output, and figures | Same rendering as a standard notebook viewer; cells and outputs are visible inline. |
+| Markdown | `.md`, `.markdown` | Reports, notes, methods sections | Rendered with headings, tables, and code blocks. |
+| HTML | `.html`, `.htm` | Tool-generated reports | Opens inline in the chat panel. |
+| PDF | `.pdf` | Papers, methods documents, regulatory filings | Renders page-by-page in the document viewer. |
+| DOCX | `.docx` | Word documents | Renders in place; agent-generated reports can be converted to DOCX. |
+| PPTX | `.pptx` | Slide decks | Opens inline; agent-generated decks land here directly. |
+
+## Images
+
+| Format | Extension | Use case | Notes |
+|--------|-----------|----------|-------|
+| PNG, JPG, JPEG | `.png`, `.jpg`, `.jpeg` | Photographs, figures, microscopy snapshots | Zoom and arrow-key navigation across multiple images. |
+| SVG | `.svg` | Vector figures | Scalable rendering for publication-quality work. |
+| GIF | `.gif` | Animations, multi-frame previews | Animation plays inline. |
+
+## Choosing the right format
 
 <AccordionGroup>
   <Accordion title="Which format should I use for RNA-seq data?">
-    It depends on the stage of your analysis. Use **FASTQ** if you want Galagos to run the full pipeline from raw reads (alignment, quantification, QC). Use **CSV** if you already have a count matrix and want to start directly from differential expression or downstream analysis.
+    Use **FASTQ** if you want the agent to run the full pipeline from raw reads (QC, alignment, quantification). Use **CSV** or **TSV** if you already have a count matrix and want to start at differential expression. Use **BAM** if you want to skip alignment but still do quantification yourself.
   </Accordion>
-  <Accordion title="Should I upload raw BAM files or processed counts?">
-    Upload **BAM** files if you need variant calling (e.g., GATK HaplotypeCaller) or if you want Galagos to handle quantification from aligned reads. Upload a **CSV** count matrix if quantification is already done and you want to move straight to statistical analysis.
+  <Accordion title="BAM or CSV count matrix?">
+    Upload **BAM** when you need variant calling (e.g. GATK HaplotypeCaller) or want the agent to handle quantification from aligned reads. Upload a **CSV** matrix when alignment and quantification are already done.
   </Accordion>
-  <Accordion title="What is H5AD and when should I use it?">
-    H5AD is the on-disk format for [AnnData](https://anndata.readthedocs.io) objects used in the Scanpy ecosystem. Use it for single-cell RNA-seq workflows — clustering, dimensionality reduction, trajectory analysis, and cell-type annotation. If your data is currently in a Seurat RDS file or a 10x MEX directory, convert it to H5AD before uploading or contact support for conversion guidance.
+  <Accordion title="When should I use H5AD?">
+    H5AD is the on-disk format for [AnnData](https://anndata.readthedocs.io) and is the preferred format for single-cell RNA-seq workflows — clustering, dimensionality reduction, trajectory analysis, and cell-type annotation. If your data is in a Seurat RDS file or a 10x MEX directory, convert it to H5AD before uploading. Ask the agent for help if you are unsure.
   </Accordion>
   <Accordion title="Can I upload compressed files?">
-    Yes. `.fastq.gz` and `.vcf.gz` are both accepted and recommended to reduce upload time and storage usage. Do not use zip archives (`.zip`) — upload the files directly.
+    Yes. `.fastq.gz` and `.vcf.gz` are recommended — they upload faster and consume less project storage. Do not zip multiple files into a `.zip` archive; upload them directly.
+  </Accordion>
+  <Accordion title="What if my format isn't on this list?">
+    The agent can frequently read formats not enumerated here using packages it installs on demand inside the project sandbox. Upload the file and describe what it contains in plain English. If a viewer cannot handle the format natively, the agent will still be able to analyse it.
   </Accordion>
 </AccordionGroup>
 
-## Data pseudonymization requirement
+## Data pseudonymisation requirement
 
 <Warning>
-  Any file derived from human biological samples — including FASTQ reads, BAM alignments, VCF variant calls, and metadata CSVs containing patient or donor information — must be pseudonymized before upload. This is a GDPR requirement. Galagos does not perform pseudonymization on your behalf.
+  Any file derived from human biological samples — FASTQ reads, BAM alignments, VCF variant calls, and metadata tables with patient or donor information — must be pseudonymised before upload. This is a GDPR obligation. Galagos does not pseudonymise on your behalf.
 </Warning>
 
-Pseudonymization means replacing all direct identifiers (names, national ID numbers, hospital record numbers, or any other data that could identify an individual) with opaque tokens before the file leaves your institution. For guidance, see [Uploading files — Data privacy and GDPR requirements](/analyses/uploading-files#data-privacy-and-gdpr-requirements).
+Replace direct identifiers (names, dates of birth, hospital record numbers, sample barcodes linked to identifiable individuals) with opaque tokens before the file leaves your institution. Keep the mapping between tokens and real identities in a secure location at your institution. See [Uploading files — Data privacy and GDPR requirements](/analyses/uploading-files#data-privacy-and-gdpr-requirements) for details.
 
 ## Next steps
 
 <CardGroup cols={2}>
   <Card title="Upload files" icon="upload" href="/analyses/uploading-files">
-    Step-by-step instructions for getting your data into a project sandbox.
+    Step-by-step instructions for getting data into a project sandbox.
+  </Card>
+  <Card title="Visualisations and reports" icon="chart-bar" href="/analyses/visualizations-and-reports">
+    See what each viewer looks like and what controls it offers.
   </Card>
   <Card title="Run an analysis" icon="play" href="/analyses/running-an-analysis">
-    Describe your research question and let Galagos plan and execute the workflow.
+    Describe your research question and let the agent plan and execute.
   </Card>
 </CardGroup>

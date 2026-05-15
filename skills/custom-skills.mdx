@@ -1,60 +1,95 @@
 ---
-title: "Custom skills: encode your lab's analysis protocols"
-description: "Capture your preferred tools, parameter settings, and interpretation logic as a reusable custom skill that Galagos applies automatically to future analyses."
+title: "Custom Skills: write your own"
+description: "Capture your lab's preferred protocols as reusable Skills in plain English — from chat. The agent saves the text, applies it automatically, and you can promote it to your personal library."
 ---
 
-Custom skills let you capture your lab's preferred analysis approaches as reusable building blocks. Instead of re-specifying your tool choices, parameter thresholds, and interpretation logic every time you run an analysis, you define them once as a custom skill — and Galagos applies them automatically in every relevant analysis going forward.
+Custom Skills let you encode your lab's preferred analysis approaches in plain English. Instead of repeating the same tool choices, parameter thresholds, and interpretation rules in every prompt, you write them once as a Skill — and the agent applies them automatically every time the Skill is enabled.
 
-## What a custom skill defines
+A Skill is not code. It is a short, written brief. *"Whenever I upload gene expression data, log-transform counts and filter genes with zero reads in more than half the samples"* is a complete, working Skill.
 
-A custom skill can encode any combination of the following:
+## What a Skill can encode
 
-- **Preferred tools** — specify which aligner, caller, or analysis package to use
-- **Parameter settings** — lock in the exact flags, thresholds, and filtering criteria your lab relies on
-- **Pipeline steps** — define the sequence of operations and how outputs feed into subsequent steps
-- **Output formats** — specify how results should be structured or exported
-- **Interpretation logic** — guide how Galagos contextualises and narrates results
+A Skill can describe any combination of:
 
-## When to create a custom skill
+- **Tool preferences** — *"use STAR for alignment, not HISAT2"*.
+- **Parameter settings** — *"DESeq2 with FDR 5%, |log2FC| > 1, and shrinkage on"*.
+- **Pipeline steps** — *"align, quantify with featureCounts, then run DESeq2"*.
+- **Output formatting** — *"export supplementary tables as TSV with gene symbols, not Ensembl IDs"*.
+- **Interpretation guidance** — *"flag genes in the top 100 hits that overlap our internal cancer panel"*.
 
-Custom skills are most valuable when your lab has established, repeatable protocols. Common examples include:
+You can mix any of these in a single Skill. The agent reads the brief and decides how to apply it.
+
+## When to write a custom Skill
+
+Custom Skills earn their keep when a workflow is repeatable. Common cases:
 
 <AccordionGroup>
-  <Accordion title="Lab-specific RNA-seq pipeline">
-    "Our standard RNA-seq pipeline always uses STAR for alignment with these specific parameters, featureCounts for quantification, and DESeq2 with our preferred filtering thresholds for differential expression."
+  <Accordion title="Lab-standard RNA-seq pipeline">
+    *"For every bulk RNA-seq dataset, align with STAR, quantify with featureCounts, and run DESeq2 with shrinkage enabled and an FDR threshold of 5%. Always produce a volcano plot with the top 20 genes labelled."*
   </Accordion>
-  <Accordion title="Variant calling with in-house thresholds">
-    "For variant calling, always use GATK HaplotypeCaller followed by our lab's hard filtering criteria: QD &lt; 2.0, FS &gt; 60.0, MQ &lt; 40.0."
+  <Accordion title="In-house variant filtering">
+    *"For variant calling, always use GATK HaplotypeCaller followed by the lab's hard filters: QD < 2.0, FS > 60.0, MQ < 40.0. Annotate with SnpEff and exclude variants in repeat regions."*
   </Accordion>
-  <Accordion title="Single-cell analysis with consistent clustering settings">
-    "Run Scanpy with resolution 0.5 for Leiden clustering, exclude cells with fewer than 200 genes or more than 5% mitochondrial reads, and always produce a UMAP coloured by cell type."
+  <Accordion title="Consistent single-cell preprocessing">
+    *"For Scanpy workflows, exclude cells with fewer than 200 genes or more than 5% mitochondrial reads. Use Leiden resolution 0.5 for initial clustering. Always produce a UMAP coloured by cell type."*
+  </Accordion>
+  <Accordion title="Reading papers consistently">
+    *"When I share a PDF paper, extract the methods, the figures, and the supplementary tables. I do not need the introduction or the discussion unless I ask."*
   </Accordion>
 </AccordionGroup>
 
-## How to create a custom skill
+## Writing a Skill from chat
+
+The fastest path is to ask the agent to write one for you. It already has the context.
 
 <Steps>
-  <Step title="Navigate to the Skills section">
-    Open your project in Galagos and click **Skills** in the left sidebar.
+  <Step title="Open the Skills panel">
+    Click the wrench icon in the project's right sidebar.
   </Step>
-  <Step title="Click Create Skill">
-    Click the **Create Skill** button in the top-right corner of the Skills section.
+  <Step title="Click Create">
+    The Skill creator opens as a chat prompt.
   </Step>
-  <Step title="Define the skill name and description">
-    Give your skill a clear, descriptive name (for example, "Lab RNA-seq pipeline") and a short description of what it does and when Galagos should apply it.
+  <Step title="Describe what you want in plain English">
+    Tell the agent what the Skill should do, when it should apply, and any specific parameters or output preferences. One paragraph is usually enough.
   </Step>
-  <Step title="Specify the tools, parameters, and steps">
-    Add the tools your skill uses, the parameters each tool should run with, and the order of pipeline steps. You can also define output format preferences and any interpretation logic.
+  <Step title="Iterate">
+    The agent drafts the Skill. Read it. Ask for tweaks — *"add a sentence about the FDR threshold"*, *"don't mention specific gene symbols, keep it general"* — until the brief matches what you want.
   </Step>
-  <Step title="Save and use the skill">
-    Click **Save**. Your custom skill is now available in all your projects. Galagos will apply it automatically when your prompt matches the skill's scope, or you can reference it directly in your prompt.
+  <Step title="Save">
+    Click **Save**. The Skill is attached to the current project and toggled on. The next prompt will use it.
   </Step>
 </Steps>
 
-## Privacy and sharing
+<Tip>
+  Save Skills *after* you have run the analysis you want to capture, not before. The agent writes a better Skill when it knows what worked.
+</Tip>
 
-Custom skills are **private to your account** by default. Other users — including team members in the same organisation — cannot see or use your custom skills.
+## Promoting to your personal library
+
+A Skill you write inside a project is **project-local** by default — it lives in that project's Skills panel and isn't visible elsewhere. To make it reusable across every project you create, click **Save to My Skills** on the expanded Skill description. It will appear in your personal library and pre-attach when you start similar projects.
+
+## Sharing Skills with collaborators
+
+You can export a Skill as a small file and import it into another workspace, or share it with a collaborator. The text is plain — no opaque binary format, no hidden state — so reviewers can read what they're being asked to attach.
 
 <Note>
-  **Team Skill Libraries are coming soon.** This feature will let you share custom skills across your team or organization. Institutional protocols will stay in the platform when people leave, and new team members will be able to run your lab's proven analyses from day one.
+  Shared team Skill libraries are on the way. Workspace-level pinned and required Skills already let owners and admins curate a baseline for the whole team — see [Workspaces](/concepts/workspaces).
 </Note>
+
+## A few tips
+
+- **Brief like a new lab member, not a computer.** Tell the Skill *why* and *when*, not just *what*. *"Use limma-voom because we always have low replicate counts"* is more useful than *"use limma-voom"*.
+- **One paragraph beats a checklist.** Skills are read by an agent that handles judgement — over-specifying produces brittle output.
+- **Test on a real project.** Run a familiar analysis with the Skill enabled and read the Steps list. If the agent isn't doing what you intended, refine the brief.
+- **Update when your defaults change.** A Skill is not a contract; edit it as the lab's practice evolves.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Skills overview" icon="wand-magic-sparkles" href="/skills/overview">
+    How the Skills panel works inside a project.
+  </Card>
+  <Card title="Workspaces" icon="users" href="/concepts/workspaces">
+    Pinned and required Skills at the workspace level.
+  </Card>
+</CardGroup>

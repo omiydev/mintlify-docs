@@ -38,7 +38,9 @@
             "group": "Core Concepts",
             "pages": [
               "concepts/projects",
+              "concepts/workspaces",
               "concepts/skills",
+              "concepts/memory",
               "concepts/credits-and-storage"
             ]
           },
@@ -49,7 +51,8 @@
               "analyses/running-an-analysis",
               "analyses/supported-file-formats",
               "analyses/visualizations-and-reports",
-              "analyses/session-persistence"
+              "analyses/session-persistence",
+              "analyses/reproducibility-and-audit"
             ]
           },
           {
@@ -58,6 +61,12 @@
               "skills/overview",
               "skills/pre-built-skills",
               "skills/custom-skills"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations/cli"
             ]
           },
           {

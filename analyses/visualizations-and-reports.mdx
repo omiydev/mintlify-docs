@@ -1,84 +1,122 @@
 ---
-title: "Visualizations and reports from Galagos analyses"
-description: "Galagos produces publication-ready plots and structured reports automatically. Learn what outputs to expect and how to download them for your papers."
+title: "Visualisations and reports"
+description: "Every Galagos project includes built-in viewers for sequences, structures, alignments, variants, trees, tables, and documents — plus auto-generated reports you can export to PDF, DOCX, or PPTX."
 ---
 
-After an analysis completes, Galagos presents its findings as a structured report that includes publication-ready visualizations, a summary of the methods and parameters used, key statistical results, and relevant literature references. You do not need to request a report separately — it is generated automatically as part of every analysis.
+When you click a file in a project, Galagos picks the right viewer automatically. There is nothing to install, no separate window, and no download — the viewer opens inline next to the chat. When the agent produces a plot, the figure renders in the chat itself; ask for a different scale or a different split and the new figure replaces it within seconds.
 
-## Visualization types
+## Built-in viewers
 
-Galagos generates plots appropriate to the analysis type. The following are the most common output types:
+The viewer is determined by the file type. The same viewer drives both files you upload and files the agent produces.
 
 <CardGroup cols={2}>
-  <Card title="Volcano plots" icon="chart-line">
-    Used in differential expression analysis to display fold change against statistical significance. Points are colored by significance threshold, making it easy to identify up- and down-regulated genes at a glance.
+  <Card title="3D structure viewer" icon="cube">
+    PDB, mmCIF, SDF, MOL, MOL2, XYZ. Cartoon, stick, sphere, and surface representations. Rotate freely. Recolour by chain or secondary structure. Click two atoms to measure distance. Paste a PDB ID in the chat to fetch a structure directly from the database.
   </Card>
-  <Card title="Heatmaps" icon="table-cells">
-    Used for clustering, expression profiling, and correlation analysis. Galagos uses hierarchical clustering by default and labels rows and columns automatically from your data.
+  <Card title="Sequence browser" icon="dna">
+    FASTA, FASTQ, GenBank. Scrollable sequence display with annotations. FASTQ files include quality strips. Long sequences load progressively.
   </Card>
-  <Card title="UMAP plots" icon="circle-nodes">
-    Used in single-cell RNA-seq workflows to visualize high-dimensional data in two dimensions. Cell clusters are colored automatically, and Galagos overlays marker gene expression on request.
+  <Card title="Phylogenetic tree viewer" icon="diagram-project">
+    Newick and NHX. Horizontal and radial layouts. Branch lengths preserved. Hover to see node and clade information.
   </Card>
-  <Card title="Bar charts" icon="chart-bar">
-    Used for count comparisons, quality control summaries, and categorical data. Axis labels and legends are generated from your data's column headers and sample names.
+  <Card title="Genome browser" icon="chart-line">
+    BAM, VCF, BED, GFF, GTF, BigWig. Standard track-based genome browser. Switch any track to a sortable table view with one click — useful for filtering variants or inspecting peak summits.
+  </Card>
+  <Card title="Variant and alignment tables" icon="table">
+    VCF and BAM data as sortable, filterable tables. Pair with the genome browser to jump between the table and the locus.
+  </Card>
+  <Card title="Tabular viewer" icon="table-cells">
+    CSV and TSV files open as searchable, sortable, filterable tables. Click a column header to sort; click again to reverse.
+  </Card>
+  <Card title="Notebook and document viewer" icon="file-lines">
+    Jupyter notebooks render with code, output, and figures intact. Markdown, HTML, PDF, DOCX, and PPTX all open in place.
+  </Card>
+  <Card title="Image viewer" icon="image">
+    PNG, JPG, SVG, GIF. Zoom and arrow-key navigation through multiple images. Useful for microscopy snapshots and figure drafts.
   </Card>
 </CardGroup>
 
+## Inline figures from the agent
+
+Asking for "a volcano plot", "a heatmap", or "a UMAP" produces the figure rendered directly in the chat. The figure is interactive where appropriate — hover labels, axis scales, click-through to source rows — and downloadable as PNG or SVG from the icon in the figure's top-right corner.
+
+Follow-up requests replace the existing figure rather than appending a new one:
+
+- *"Now show that on a log scale."*
+- *"Split the bars by condition."*
+- *"Drop the unannotated genes."*
+- *"Same plot but limit to the top 50 by adjusted p-value."*
+
+The agent recomputes from the underlying data, not from the image, so the new figure is correct rather than re-rendered.
+
+## Common figure types
+
+| Figure | When the agent produces it |
+| --- | --- |
+| Volcano plot | Differential expression — fold change against significance, with thresholds annotated. |
+| Heatmap | Expression clustering, correlation matrices, top-gene comparison. Hierarchical clustering by default. |
+| UMAP, t-SNE | Single-cell embeddings. Colour by cluster, by condition, or by marker-gene expression on request. |
+| Bar chart | Count comparisons, QC summaries, categorical breakdowns. |
+| Boxplot, violin | Distribution comparisons across conditions or groups. |
+| Manhattan plot | GWAS and genome-wide significance results. |
+| ROC curve, PR curve | Classifier evaluation. |
+
+Ask in plain English. *"A volcano plot, but colour upregulated genes in orange and downregulated in blue, with the top 20 labelled"* is a perfectly normal request.
+
 <Tip>
-  You can request a specific plot type in your prompt. For example: "Generate a heatmap of the top 50 differentially expressed genes" or "Show a UMAP colored by cluster and by `GAPDH` expression side by side."
+  Vague prompts produce reasonable defaults. Specific prompts produce exactly what you ask for. *"Show the differential expression results"* gets you a volcano plot; *"a volcano plot of the DESeq2 results, log10 p-axis, labelled by gene symbol for any |log2FC| > 2"* gets you exactly that.
 </Tip>
 
 ## Structured reports
 
-Every completed analysis includes a structured report in the chat. A report contains:
+When an analysis is non-trivial, the agent assembles a structured report alongside the figures. A report contains:
 
-- **Analysis summary**: a plain-English description of the goal, approach, and tools used
-- **Parameters**: the exact values passed to each tool (for example, DESeq2 thresholds, GATK filter settings, Scanpy resolution parameters)
-- **Key findings**: statistical results, ranked gene lists, variant counts, or cluster assignments, depending on the analysis type
-- **Literature references**: citations from PubMed, UniProt, or NCBI that support the methods or findings, linked inline
+- **Analysis summary** — a plain-English description of the goal, the approach, and the tools used.
+- **Parameters** — exact values passed to each tool (DESeq2 thresholds, GATK filters, Scanpy resolution).
+- **Key findings** — statistical results, ranked gene lists, variant counts, cluster assignments.
+- **Limitations paragraph** — caveats the agent flags about its own output (sample size, batch, normalisation, mapping coverage). See [Reproducibility and audit](/analyses/reproducibility-and-audit).
+- **Literature references** — citations from PubMed, UniProt, and NCBI relevant to the methods or findings.
 
-Reports are structured so you can read them top-to-bottom for a narrative summary, or skip directly to the parameters section to verify reproducibility.
+Reports are designed to be readable top-to-bottom or skimmable directly to the parameters section.
 
-## Publication-ready outputs
+## Exporting results
 
-All plots generated by Galagos are formatted for direct use in manuscripts and presentations:
+Every viewer and every report includes export controls. The right export format depends on what you are doing next:
 
-- Vector-quality resolution suitable for journal submission
-- Clean axis labels, legends, and color schemes
-- Consistent font sizes across panels
+<CardGroup cols={2}>
+  <Card title="PDF" icon="file-pdf">
+    For reading and sharing. Markdown reports include a **Convert to PDF** button in the viewer. Useful for review packets and email.
+  </Card>
+  <Card title="DOCX" icon="file-word">
+    For drafting manuscripts. Markdown reports include a **Convert to DOCX** button. Edit further in Word or Google Docs.
+  </Card>
+  <Card title="PPTX" icon="file-powerpoint">
+    For talks. Ask the agent for a slide deck and you get a PPTX with figures, summaries, and conclusions already placed. Useful for lab meetings and conference talks.
+  </Card>
+  <Card title="PNG / SVG" icon="image">
+    For individual figures. Download icon in the top-right corner of each plot.
+  </Card>
+</CardGroup>
 
-You do not need to reformat plots in a graphics editor before including them in a paper.
+You can also download an entire project as a ZIP — chat history, inputs, agent-written scripts, and outputs together. See [Reproducibility and audit](/analyses/reproducibility-and-audit) for the full archive contents.
 
-## Downloading results
+## A few tips
 
-To download a report or visualization:
-
-<Steps>
-  <Step title="Locate the result in the chat">
-    Completed reports and plots appear inline in the chat. Each plot has a download icon in its top-right corner.
-  </Step>
-  <Step title="Download individual plots">
-    Click the download icon on any plot to save it as a PNG or SVG file.
-  </Step>
-  <Step title="Download the full report">
-    Click **Download report** at the bottom of the structured report card. This saves the full report — including parameters, findings, and references — as a PDF.
-  </Step>
-  <Step title="Access files from the Files tab">
-    All output files generated during an analysis are also saved to your project's **Files** tab, where you can download them at any time.
-  </Step>
-</Steps>
-
-<Note>
-  Downloaded files remain available in the **Files** tab for as long as your project exists. Analysis outputs count toward your project's storage quota.
-</Note>
+- **Click before you screenshot.** Most figures are interactive; you may not need the screenshot at all.
+- **Ask, don't reformat.** If a plot is the right shape but the wrong colour or scale, say so. The agent re-renders from the data, not from the image.
+- **Don't overshoot the format.** PDF for static sharing, DOCX for further writing, PPTX for talks. Pick the one closest to your next step.
+- **Use the table-genome browser switch on VCFs.** Filtering hundreds of variants is easier in the table; spot-checking a single call is easier in the browser.
 
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Running an analysis" icon="flask" href="/analyses/running-an-analysis">
-    Learn how to write effective prompts and interpret Galagos's workflow trace.
+  <Card title="Supported file formats" icon="file" href="/analyses/supported-file-formats">
+    The full list of formats each viewer opens.
   </Card>
-  <Card title="Session persistence" icon="clock-rotate-left" href="/analyses/session-persistence">
-    Understand how your analysis state is saved so you can return to long-running jobs.
+  <Card title="Running an analysis" icon="flask" href="/analyses/running-an-analysis">
+    How to write prompts that produce the figures you need.
+  </Card>
+  <Card title="Reproducibility and audit" icon="list-check" href="/analyses/reproducibility-and-audit">
+    What gets recorded alongside the figures and the report.
   </Card>
 </CardGroup>

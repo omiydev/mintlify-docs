@@ -1,112 +1,166 @@
 ---
 title: "Run a bioinformatics analysis with Galagos"
-description: "Type your research question in plain English and Galagos plans the workflow, selects the right tools, and runs the analysis end-to-end — no code required."
+description: "Describe what you want in plain English. The agent plans the workflow, runs it inside your project sandbox, summarises the result, and lets you refine in the same conversation."
 ---
 
-To start an analysis, open the chat interface inside your project and describe what you want to do in plain English. Galagos reads your question, plans a multi-step workflow, selects the appropriate tools and packages, and runs the analysis autonomously — surfacing results, visualizations, and literature-grounded insights directly in the chat.
+A Galagos analysis is a conversation, not a script. You describe your research question, the agent writes a plan, runs the steps inside your project's sandbox, and returns a written summary with figures and references. You read the summary, ask for refinements, and the same conversation continues from there.
 
-## How to start an analysis
+You do not name tools. You do not write code. You do not configure a pipeline. The agent does.
+
+## The conversation loop
+
+Every analysis follows the same rhythm:
 
 <Steps>
-  <Step title="Open your project">
-    From the Galagos dashboard, click into the project that contains your uploaded data. If your files are not yet uploaded, see [Uploading files](/analyses/uploading-files) first.
+  <Step title="Ask">
+    Type your research question into the chat at the bottom of the project. Plain English works. Reference uploaded file names directly.
   </Step>
-  <Step title="Type your research question">
-    Click the chat input at the bottom of the screen and describe your analysis in plain English. You can reference file names directly in your prompt.
+  <Step title="Read the plan">
+    The agent writes its plan in plain English in the right panel *before* compute starts. Read it; this is the moment to catch a misread of your data.
   </Step>
-  <Step title="Review the planned workflow">
-    Galagos displays the steps it plans to execute — the tools it will call, the parameters it will use, and the expected outputs. No manual approval is required; the analysis starts immediately.
+  <Step title="Run">
+    The agent executes step by step — shell commands, scripts, package installs, all visible in the Steps list. You can close the browser; the run continues in the background.
   </Step>
-  <Step title="Wait for results">
-    Galagos runs each step in sequence. Progress appears in the chat as each step completes. For long-running analyses, you can safely close the browser and return later — see [Session persistence](/analyses/session-persistence).
+  <Step title="Read the summary">
+    When the run finishes, the agent returns a written summary with the headline numbers, the figures, and a self-written Limitations paragraph. You see results, not a raw output folder.
   </Step>
-  <Step title="Review your results">
-    When the analysis finishes, Galagos presents a structured report with findings, visualizations, parameter summaries, and relevant literature references. You can ask follow-up questions in the same chat to drill deeper.
+  <Step title="Refine">
+    Ask follow-up questions in the same conversation. *"Re-run with the stricter filter."* *"Do these results look believable?"* The agent has full context of the previous steps.
   </Step>
 </Steps>
 
 <Tip>
-  Be specific in your prompts. Including the tool name, comparison groups, file name, and desired output leads to more accurate results. Vague prompts work, but precise ones work better.
+  Start broader than you think. Asking for a comprehensive analysis lets the agent show you what's interesting; you can then drill into the parts that matter. A narrow first question often misses the result that actually matters.
 </Tip>
 
-## Example prompts
+## What to type — concrete examples
 
-The following prompts illustrate the range of analyses Galagos can run:
+The following prompts are taken from real workflows. They illustrate the level of detail that produces good results.
 
 <Tabs>
-  <Tab title="RNA-seq">
-    **Differential gene expression**
+  <Tab title="From a GEO accession">
+    ```
+    Pull GSE247541. Align to the human genome. Give me a count matrix.
+    Tell me if the QC looks okay.
+    ```
 
-    ```
-    Perform differential gene expression analysis comparing treatment vs control
-    groups using DESeq2 on counts.csv. Generate a volcano plot and a list of
-    significantly differentially expressed genes (padj < 0.05, |log2FC| > 1).
-    ```
+    The agent downloads the dataset server-side, runs alignment and quantification, and returns the matrix together with a QC summary.
   </Tab>
-  <Tab title="Single-cell">
-    **Single-cell RNA-seq clustering**
-
+  <Tab title="Differential expression">
     ```
-    Perform single-cell RNA-seq clustering on data.h5ad and visualize the UMAP.
-    Identify marker genes for each cluster and annotate cell types.
+    I want to analyse 44620_GSE33447_expmat.data.txt and perform a differential
+    expression analysis comparing breast cancer vs normal breast tissues. Use
+    DESeq2 and produce a volcano plot with significant genes labelled.
+    ```
+
+    The agent reads the matrix, identifies the conditions from the column headers or asks you to confirm, runs DESeq2 with sensible defaults, and returns the volcano plot inline.
+  </Tab>
+  <Tab title="Single-cell clustering">
+    ```
+    Cluster data.h5ad with Scanpy. Show a UMAP coloured by cluster, and find
+    marker genes for each cluster. Annotate the cell types where you can.
     ```
   </Tab>
   <Tab title="Variant calling">
-    **Variant calling from aligned reads**
-
     ```
-    Call variants from sample.bam using GATK HaplotypeCaller. Filter for
-    high-confidence SNPs and indels and output a VCF file.
+    Call variants from sample.bam with GATK HaplotypeCaller. Apply the standard
+    hard filters for SNPs and indels and output a filtered VCF.
     ```
   </Tab>
-  <Tab title="Protein">
-    **Structure prediction and BLAST search**
-
+  <Tab title="Structure prediction">
     ```
-    Predict the structure of this protein sequence using AlphaFold and
-    visualize the predicted structure.
+    Predict the structure of this protein sequence with AlphaFold and show me
+    the model. Highlight regions with low pLDDT confidence.
     ```
-
+  </Tab>
+  <Tab title="Literature-grounded">
     ```
-    Run a BLAST search for this protein sequence against UniProt and return
-    the top 20 hits with E-value, identity percentage, and alignment scores.
+    For my top 20 differentially expressed genes, find recent PubMed papers
+    (2023 onward) that link them to breast cancer prognosis. Summarise the
+    evidence and cite each paper.
     ```
   </Tab>
 </Tabs>
 
-## What Galagos does during an analysis
+## What the agent does behind the scenes
 
-### Autonomous task completion
+### Plan preview
 
-Galagos plans and executes workflows without asking for approval at every step. It selects from 207+ pre-built bioinformatics packages — including DESeq2, GATK, Scanpy, AlphaFold, BLAST, and more — and chains the appropriate tools based on your question.
+Before committing CPU time, the agent writes a plain-English plan: which comparison, which tool, which parameters, which expected output. Read it before walking away. A one-line correction here saves minutes or hours of misdirected compute.
 
-### Self-healing code
+### Running in real shells
 
-If a step fails — for example, because a tool encounters an unexpected input format or a parameter is out of range — Galagos automatically detects the error and attempts an alternative approach. You see the recovery steps in the chat so you always know what happened.
+The agent runs bash, R, and Python in a real Linux sandbox attached to your project. It installs packages it needs (`pip`, `install.packages`, `apt`) and they persist for next time. It downloads datasets server-side — your laptop does not stay open while a 30 GB SRA download completes.
 
-### Literature-grounded insights
+### Self-healing recovery
 
-Galagos pulls supporting scientific context from [PubMed](https://pubmed.ncbi.nlm.nih.gov), [UniProt](https://www.uniprot.org), and [NCBI](https://www.ncbi.nlm.nih.gov) to accompany its findings. References appear inline in the report alongside the results they support.
+If a step fails — wrong input format, missing dependency, parameter out of range — the agent detects the error, tries an alternative, and reports the recovery in the Steps list. You see what happened without having to debug.
 
-## Interpreting the chat response
+### Critical-decision interrupts
 
-As Galagos runs your analysis, the chat shows a live trace of the workflow. Each entry in the trace corresponds to one step: the tool called, the inputs used, and a brief summary of the output. When the analysis completes, a collapsible report appears with:
+For decisions that materially change the result, the agent pauses and asks. The canonical example: **DESeq2 versus limma-voom** for differential expression with few replicates. The agent surfaces both options, explains the trade-off, and lets you pick the suggested answer, type a custom answer (*"use limma-voom with eBayes shrinkage"*), or dismiss to let it proceed with its best guess. The decision is recorded in the run history.
 
-- A summary of the analysis goal and approach
-- Parameters used at each step
-- Key findings and statistical results
-- Visualizations (plots, tables)
-- Literature references relevant to the findings
+### Background jobs
 
-You can ask follow-up questions — such as "Now compare just the top 50 genes" or "Run the same analysis with edgeR instead" — and Galagos will continue in the same session with full context of the previous steps.
+Long downloads and long compute steps run as background jobs. An orange status bar above the chat input shows what's active (*"1 background process: wget"*). You can keep working on other questions; close the browser; the work continues. Galagos emails you when a long-running job finishes or when the agent needs a decision.
+
+## Live trace and the final report
+
+As the run progresses, the chat shows each step in real time — the tool called, the inputs used, the brief summary of the output. Click any step to expand its full command, stdout, and stderr. When the analysis completes, a collapsible report appears with:
+
+- A summary of the goal and approach.
+- The parameters used at each step.
+- Key findings — ranked gene lists, variant counts, cluster assignments — depending on the analysis.
+- Figures rendered inline.
+- The Limitations paragraph: caveats the agent flags about its own output.
+- Literature references from [PubMed](https://pubmed.ncbi.nlm.nih.gov), [UniProt](https://www.uniprot.org), and [NCBI](https://www.ncbi.nlm.nih.gov).
+
+Reports read top-to-bottom for a narrative, or you can skip to the parameters block to verify reproducibility.
+
+## Refining in the same conversation
+
+The cheapest, fastest move is to keep asking. The agent already has the data, the tool versions, and the context — it doesn't need to re-establish any of that to answer:
+
+- *"Do these results look believable given the sample size?"* — the agent critiques its own output.
+- *"Re-run with FDR 5% instead of 10%."* — same workflow, different threshold.
+- *"What if I exclude sample 4?"* — re-runs the comparison without it.
+- *"Now do the same comparison with edgeR and tell me where they disagree."* — runs the alternate method and produces a comparison.
+- *"Show me the same volcano plot but with the top 20 labelled."* — replaces the figure in seconds.
+
+Follow-ups consume far fewer credits than starting a new analysis, because the agent doesn't re-plan from scratch.
+
+## Time-travel editing
+
+If a step went wrong or you want to back up and try a different question, every message has a small edit and retry control. You can:
+
+- Edit and resend an earlier message to fork the conversation from that point.
+- Retry a failed step.
+- Revert to an earlier checkpoint in the conversation.
+- Undo a revert.
+
+The full history is preserved in the run record either way — time-travel doesn't erase the previous path, it branches from it.
+
+## A few tips
+
+- **Start broader than you think.** Ask for the comprehensive analysis first; drill in afterwards.
+- **Ask the agent to critique itself.** *"Are these results believable?"* often surfaces caveats you would have written down anyway.
+- **Refine in-session.** Follow-ups are cheaper, faster, and inherit context.
+- **Don't scope to fit the hardware.** Galagos runs in a real Linux sandbox with scalable compute. Ask for what you actually want.
+- **Read the Limitations paragraph.** It is the first thing a reviewer reads, and it is often the most useful thing in the report.
 
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Visualizations and reports" icon="chart-bar" href="/analyses/visualizations-and-reports">
-    Learn what types of plots Galagos generates and how to download your results.
+  <Card title="Visualisations and reports" icon="chart-bar" href="/analyses/visualizations-and-reports">
+    What the viewers and figures look like, and how to export them.
+  </Card>
+  <Card title="Reproducibility and audit" icon="list-check" href="/analyses/reproducibility-and-audit">
+    Every command, every parameter, every decision — preserved for review.
   </Card>
   <Card title="Session persistence" icon="clock-rotate-left" href="/analyses/session-persistence">
-    Understand how Galagos saves long-running analyses so you can return later.
+    Long-running jobs continue while the browser is closed.
+  </Card>
+  <Card title="Skills" icon="wand-magic-sparkles" href="/concepts/skills">
+    Reusable building blocks that change how the agent runs.
   </Card>
 </CardGroup>

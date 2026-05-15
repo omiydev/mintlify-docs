@@ -1,0 +1,108 @@
+---
+title: "Workspaces: how Galagos organises teams and shared resources"
+description: "Personal and team workspaces in Galagos — the nine tabs, member roles, shared library, and pinned Skills that let a whole lab work from the same starting point."
+---
+
+A workspace is the container Galagos uses to group everything a team works with: projects, shared files, Skills, members, billing, and audit history. Every account starts with a personal workspace for solo work. When you need to share with a lab, a department, or external collaborators, you create a team workspace and invite people in.
+
+## Personal vs team workspaces
+
+<CardGroup cols={2}>
+  <Card title="Personal workspace" icon="user">
+    The default workspace on every Galagos account. Your projects, files, and Skills live here. Suitable for solo research, exploration, and any work you don't need to share.
+  </Card>
+  <Card title="Team workspace" icon="users">
+    Created deliberately when you want to share projects with named collaborators. Every member sees the same projects, the same library, the same Skills, and the same audit trail.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Don't create a team workspace for solo work. The single-member overhead — roles, audit, member tab — adds friction without benefit. Use your personal workspace until you actually need to share.
+</Tip>
+
+## The nine workspace tabs
+
+Every workspace surfaces the same nine tabs in the left sidebar. They are the same for personal and team workspaces, although a few only become useful once you invite people in.
+
+<AccordionGroup>
+  <Accordion title="Projects">
+    The list of project sandboxes that belong to the workspace. Each card shows the project name, role, last activity, and chat count. Use the table view at the workspace level to rename, share, move between workspaces, or delete projects.
+  </Accordion>
+  <Accordion title="Library">
+    A workspace-wide file bucket for assets that more than one project needs: reference genomes, panel BED files, gene lists, sample sheets. Upload once at the workspace level; pull a file into any project with a single click rather than re-uploading.
+
+    Seed the library before you invite anyone. The first thing a new teammate does is open a project and look for the lab's reference files.
+  </Accordion>
+  <Accordion title="Members">
+    Invite people, change roles, and remove access. One invitation gives access to all projects in the workspace, the library, and the Skills set — there is no per-project invite step.
+
+    Three roles are supported:
+
+    - **Owner** — manages the workspace, billing, and seats.
+    - **Admin** — invites members, configures Skills, library, and endpoints.
+    - **Member** — uses the platform: creates projects, runs analyses, attaches Skills.
+  </Accordion>
+  <Accordion title="LLM endpoints">
+    An optional tab for teams that need to route inference through their own LLM provider — most often for compliance or to keep activity inside an existing approved vendor. Most teams skip this tab entirely. For setup details, see [Bring Your Own LLM](/security/bring-your-own-llm).
+  </Accordion>
+  <Accordion title="Skills">
+    Workspace-level Skills configuration. Two switches change how members interact with each Skill:
+
+    - **Pinned** — the Skill becomes a default for new sessions in the workspace. New projects start with it enabled.
+    - **Required** — members cannot turn the Skill off. Useful for QC thresholds, privacy policy guardrails, or citation conventions you want enforced across every project.
+
+    Pin two or three Skills, not twenty. Members can always attach more from the catalogue inside a project.
+  </Accordion>
+  <Accordion title="Audit log">
+    A full record of workspace actions — workspace and project creation, member invites and role changes, library uploads, Skill pinning, endpoint configuration. Each entry shows the actor, the action, and the timestamp. You can filter by event type and export to CSV. Owners see the log by default; admins can export it.
+
+    Use the audit log to answer review questions like "who added that reference panel?" or "when was this Skill required?".
+  </Accordion>
+  <Accordion title="Usage">
+    A real-time view of compute spend and credit consumption across the workspace, broken down per project and over time. Use it to plan capacity, spot run-away analyses, and decide when to upgrade.
+  </Accordion>
+  <Accordion title="Memory">
+    An opt-in store of long-term facts about how the team works — the strain panel you always use, the gene-symbol convention, the supplementary-table format you export. Galagos consults memory before running, so members don't need to repeat conventions in every prompt. See [Memory](/concepts/memory) for details.
+  </Accordion>
+  <Accordion title="Settings">
+    Workspace name, description, default access level for new members, and the default LLM model for the team. Changes apply to new sessions; in-flight work is unaffected.
+  </Accordion>
+</AccordionGroup>
+
+## Member roles in practice
+
+| Capability | Member | Admin | Owner |
+| --- | :---: | :---: | :---: |
+| Create projects, run analyses | ✓ | ✓ | ✓ |
+| Attach Skills inside a project | ✓ | ✓ | ✓ |
+| Upload to the workspace library | ✓ | ✓ | ✓ |
+| Invite members, change roles | | ✓ | ✓ |
+| Pin or require Skills | | ✓ | ✓ |
+| Configure LLM endpoints | | ✓ | ✓ |
+| Export the audit log | | ✓ | ✓ |
+| Manage billing and seats | | | ✓ |
+| Delete the workspace | | | ✓ |
+
+## A few tips
+
+- **Seed before you invite.** Upload the lab's reference files to the library and pin two or three Skills before sending invitations. The first thing a new teammate does is look for them.
+- **Use Required sparingly.** Required Skills override member judgement, so reserve them for non-negotiable rules like a QC threshold or a citation policy.
+- **Memory beats repeated instructions.** If you find yourself typing the same caveat into every prompt ("we always use GRCh38, not T2T-CHM13"), promote it to a memory entry instead.
+- **Check the audit log before review meetings.** It is faster than asking around when you need to know who changed a Skill or added a panel.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Projects" icon="folder" href="/concepts/projects">
+    How a project sandbox works inside a workspace.
+  </Card>
+  <Card title="Skills" icon="wand-magic-sparkles" href="/concepts/skills">
+    The catalogue and per-project Skill toggles.
+  </Card>
+  <Card title="Memory" icon="brain" href="/concepts/memory">
+    Persistent facts about how the team works.
+  </Card>
+  <Card title="Enterprise plan" icon="building" href="/plans/enterprise">
+    SSO, pooled credits, and dedicated infrastructure for larger teams.
+  </Card>
+</CardGroup>
