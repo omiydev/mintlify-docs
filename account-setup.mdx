@@ -1,0 +1,74 @@
+---
+title: "Account setup: create and configure your Galagos account"
+description: "Set up your Galagos account, choose the right plan, manage credentials and billing, and connect a custom LLM for Starter and above plans."
+---
+
+Setting up your Galagos account takes only a few minutes. This page covers registration, plan selection, account settings, and optional configuration such as connecting a custom LLM.
+
+## Creating an account
+
+Go to [galagos.ai/register](https://galagos.ai/register) and choose one of the following sign-up methods:
+
+- **Email and password** — enter your email address, choose a password, and confirm your email via the link Galagos sends you.
+- **Sign in with Google** — authenticate with your Google account for faster access without a separate password.
+
+Once registered, you can log in at [galagos.ai/login](https://galagos.ai/login) at any time.
+
+<Note>
+  The free Individual plan is available during beta at no cost and does not require a credit card. You receive 20 one-time credits to run your first analyses.
+</Note>
+
+## Choosing a plan
+
+After registration you are automatically placed on the free Individual plan. If your needs grow, you can upgrade from **Settings > Billing** at any time.
+
+| Plan | Price | Credits/mo | Storage/project | Active projects |
+|------|-------|-----------|-----------------|-----------------|
+| Individual | Free (beta) | 20 one-time | 10 GB | 5 |
+| Starter | €35/mo | 50 | 25 GB | 10 |
+| Advanced | €90/mo | 120 | 50 GB | 10 |
+| Professional | €150/mo | 200 | 100 GB | 10 |
+| Enterprise | Custom | Custom | Custom | Unlimited |
+
+For a full comparison of features across plans, see the [plans overview](/plans/overview).
+
+## Account settings
+
+Access your account settings by clicking your profile icon in the top-right corner and selecting **Settings**.
+
+### Changing your email or password
+
+Navigate to **Settings > Profile** to update your email address or change your password. If you signed up with Google, password management is handled through your Google account.
+
+### Managing billing
+
+Go to **Settings > Billing** to:
+
+- View your current plan and credit balance
+- Upgrade or downgrade your subscription
+- Update your payment method
+- Download past invoices
+
+### Deleting your account
+
+To delete your account and all associated data, contact [support](/support/contact). Galagos will permanently remove your data in accordance with its GDPR data deletion obligations.
+
+## Understanding credits
+
+Credits are the unit Galagos uses to measure LLM usage. Each analysis consumes a number of credits proportional to the complexity and length of the workflow. Credits are deducted when an analysis runs, not when you upload files or browse results.
+
+<Info>
+  The free Individual plan's 20 credits are one-time and do not renew. Paid plans receive a fresh credit allocation each billing month.
+</Info>
+
+For a detailed breakdown of how credits are calculated and what consumes storage, see [Credits and storage](/concepts/credits-and-storage).
+
+## Connecting a custom LLM
+
+On the **Starter plan and above**, you can connect your own LLM API key so Galagos routes analysis requests through a model of your choice. This is useful if your organization has negotiated enterprise pricing with an AI provider or has data residency requirements that mandate a specific deployment.
+
+<Tip>
+  Using a custom LLM does not change how Galagos plans or executes workflows — it only replaces the underlying model that powers the natural language interface.
+</Tip>
+
+To configure a custom LLM, go to **Settings > LLM configuration**. For full setup instructions, see [Bring your own LLM](/security/bring-your-own-llm).

@@ -1,0 +1,76 @@
+---
+title: "Pre-built skills: 207 bioinformatics tools and workflows"
+description: "Galagos ships with 207 pre-built skills covering structural biology, single-cell analysis, RNA-seq, variant calling, sequence analysis, and more."
+---
+
+Galagos ships with 207 pre-built skills covering the most common tools and workflows in bioinformatics. Each skill encodes how to run a specific tool or procedure — including parameter defaults, input/output handling, and result interpretation — so Galagos can apply it correctly without any manual configuration from you.
+
+<Tip>
+  You don't need to browse or select skills manually. The skill-finder monitors your prompt as you type and automatically applies the most relevant skills for your analysis. Browse the catalogue in your project workspace if you want to see what's available or verify which skills will be used.
+</Tip>
+
+## Structural biology
+
+Tools for predicting, modelling, and analysing protein and molecular structures.
+
+| Skill | Description |
+|---|---|
+| **AlphaFold** | Predict protein structure from amino acid sequence using deep learning |
+| **RoseTTAFold** | Protein structure prediction with three-track neural network architecture |
+| **AutoDock Vina** | Molecular docking to predict how small molecules bind to protein targets |
+
+## Single-cell analysis
+
+Tools for processing and interpreting single-cell RNA sequencing data.
+
+| Skill | Description |
+|---|---|
+| **Scanpy** | Python-based single-cell analysis including clustering, trajectory inference, and visualisation |
+| **Seurat** | R-based single-cell RNA-seq analysis with extensive integration and annotation support |
+| **CellRanger** | Align and quantify 10x Genomics single-cell sequencing data |
+
+## RNA-seq
+
+Tools for aligning, quantifying, and performing differential expression analysis on bulk RNA-seq data.
+
+| Skill | Description |
+|---|---|
+| **STAR** | Fast splice-aware RNA-seq read alignment to a reference genome |
+| **HISAT2** | Graph-based alignment of sequencing reads with splice-site awareness |
+| **featureCounts** | Read counting for genes and genomic features after alignment |
+| **DESeq2** | Differential expression analysis using negative binomial distribution modelling |
+| **edgeR** | Differential expression analysis for count data with empirical Bayes estimation |
+
+## Variant analysis
+
+Tools for calling, annotating, and filtering genetic variants.
+
+| Skill | Description |
+|---|---|
+| **GATK HaplotypeCaller** | Call germline SNPs and indels via local de-novo assembly of haplotypes |
+| **bcftools** | Utilities for variant calling, filtering, and manipulation of VCF and BCF files |
+| **SnpEff** | Annotate and predict the functional effects of genetic variants |
+
+## Sequence analysis
+
+Tools for searching, aligning, and comparing biological sequences.
+
+| Skill | Description |
+|---|---|
+| **BLAST** | Search sequence databases for regions of local similarity |
+| **HMMER** | Profile hidden Markov models for sensitive sequence homology searches |
+| **Clustal Omega** | Multiple sequence alignment for proteins and nucleotides |
+
+## Workflow skills
+
+End-to-end multi-step procedures that chain multiple tools together.
+
+| Skill | Description |
+|---|---|
+| **Standard RNA-seq pipeline** | Full pipeline from raw reads to differential expression: alignment → quantification → DEA |
+| **Literature review** | Structured review and synthesis of published findings relevant to your research question |
+| **Replication study** | Reproduce the analytical workflow from a published study against your own data |
+
+<Note>
+  The categories and examples above represent a selection of the full catalogue. Galagos includes 207 pre-built skills in total. To browse the complete list, open your project workspace and navigate to the **Skills** section.
+</Note>

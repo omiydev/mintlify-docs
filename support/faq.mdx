@@ -1,0 +1,90 @@
+---
+title: "Frequently asked questions about Galagos"
+description: "Answers to common questions about what Galagos does, how it handles your data, what analyses it can run, and how billing and plans work."
+---
+
+Below you will find answers to the questions we hear most often. If you cannot find what you are looking for, reach out at [contact@galagos.ai](mailto:contact@galagos.ai) and we will get back to you within 24 hours.
+
+## Platform and features
+
+<AccordionGroup>
+  <Accordion title="What is Galagos?">
+    Galagos is an AI-powered bioinformatics platform that acts as a virtual bioinformatician. You describe your research question in plain English — for example, "Run a differential expression analysis on these RNA-seq samples comparing treated vs. control" — and Galagos plans the workflow, selects the right tools, executes the analysis, and returns the results.
+
+    You do not need to install software, manage dependencies, or write scripts. Galagos handles the computational side so you can focus on the biology.
+  </Accordion>
+
+  <Accordion title="Do I need to know how to code?">
+    No. Galagos is designed for researchers who want to run rigorous bioinformatics analyses without writing code. You interact with the platform entirely through a plain English chat interface — describe what you want to analyse, and Galagos does the rest.
+
+    If you are a developer or want to extend the platform with custom pipelines, that option exists too. But coding knowledge is never required for standard use.
+  </Accordion>
+
+  <Accordion title="What types of analyses can Galagos run?">
+    Galagos supports over 207 pre-built skills covering a wide range of bioinformatics workflows, including:
+
+    - **Differential expression**: DESeq2, edgeR
+    - **Sequence search**: BLAST and related tools
+    - **Protein structure prediction**: AlphaFold
+    - **Single-cell analysis**: Scanpy and Seurat
+    - **Variant calling**: GATK and other pipelines
+    - **Molecular docking** and small-molecule analysis
+    - **Literature review** and evidence grounding
+
+    Beyond these, Galagos can combine skills into multi-step research workflows and adapt to your specific dataset and question.
+  </Accordion>
+
+  <Accordion title="Where is my data stored?">
+    Your data is stored exclusively on EU infrastructure — specifically Hetzner servers located in Germany and Finland. Your files never leave the European Union.
+
+    Galagos is GDPR compliant, and your data is never used to train models or shared with third parties. For full details, see our [data privacy policy](/security/data-privacy) and [GDPR documentation](/security/gdpr-and-dpa).
+  </Accordion>
+
+  <Accordion title="How is Galagos different from Galaxy or Nextflow?">
+    Galaxy and Nextflow are powerful tools, but they require you to manually configure workflows — selecting tools, setting parameters, connecting inputs and outputs, and debugging failures yourself.
+
+    Galagos takes a different approach: you describe your analysis goal in plain English, and the AI plans and executes the workflow for you. It also incorporates literature grounding (linking your results to published research) and self-healing (automatically diagnosing and recovering from errors mid-workflow), neither of which Galaxy or Nextflow provide out of the box.
+  </Accordion>
+
+  <Accordion title="Are my results reproducible?">
+    Yes. Every workflow you run in Galagos preserves its complete context: the input files, the sequence of steps executed, the parameters used, and every output produced. You can re-run the same workflow months later and get the same result.
+
+    Colleagues with access to your project can review every step, inspect intermediate outputs, and repeat the analysis independently — which is important for peer review and audit requirements.
+  </Accordion>
+
+  <Accordion title="What file formats are supported?">
+    Galagos accepts the most common bioinformatics file formats, including CSV, FASTQ, VCF, BAM, and H5AD. For a complete and up-to-date list, see the [supported file formats](/analyses/supported-file-formats) page.
+  </Accordion>
+
+  <Accordion title="Can I try it with my own data?">
+    Yes. Sign up for the free Individual plan — no credit card required — and you can upload your own data and run analyses immediately using your 20 one-time credits.
+
+    [Sign up free](https://galagos.ai/register)
+  </Accordion>
+</AccordionGroup>
+
+## Billing and plans
+
+<AccordionGroup>
+  <Accordion title="Is Galagos free?">
+    The Individual plan is free during the beta period. You receive 20 one-time credits for LLM usage, up to 10 GB of storage per project, and up to 5 active projects. No credit card is required to sign up.
+
+    When the beta ends, Individual plan users will be invited to move to a paid plan. See the [plans overview](/plans/overview) for pricing on all tiers.
+  </Accordion>
+
+  <Accordion title="What payment methods do you accept?">
+    Galagos accepts credit and debit cards. At checkout you can also pay with Apple Pay, Google Pay, or Klarna.
+  </Accordion>
+
+  <Accordion title="Can I change my plan anytime?">
+    Yes. You can upgrade or downgrade your plan at any time from **Settings → Billing** in your account. Upgrades take effect immediately; downgrades apply at the end of your current billing period, so you retain access to your current tier until then.
+  </Accordion>
+
+  <Accordion title="Can I cancel anytime?">
+    Yes. You can cancel your subscription at any time from **Settings → Billing**. After cancellation, your access continues until the end of your current billing period — you will not be charged again after that.
+  </Accordion>
+
+  <Accordion title="What about Enterprise?">
+    Enterprise pricing is custom and not listed publicly. It is designed for research labs, biotech companies, and academic institutions that need multi-user workspaces, HPC compute, SSO, or on-premise deployment. Contact [contact@galagos.ai](mailto:contact@galagos.ai) or visit the [Enterprise plan page](/plans/enterprise) to learn more.
+  </Accordion>
+</AccordionGroup>

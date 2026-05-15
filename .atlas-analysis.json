@@ -1,0 +1,104 @@
+{
+  "projectType": "saas",
+  "projectName": "Galagos",
+  "projectDescription": "AI-powered bioinformatics platform that lets researchers run complex biological analyses using plain English, without writing code or managing pipelines.",
+  "theme": "luma",
+  "primaryColor": "#eb550d",
+  "lightColor": null,
+  "darkColor": null,
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "account-setup"
+            ]
+          },
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "concepts/projects",
+              "concepts/skills",
+              "concepts/credits-and-storage"
+            ]
+          },
+          {
+            "group": "Running Analyses",
+            "pages": [
+              "analyses/uploading-files",
+              "analyses/running-an-analysis",
+              "analyses/supported-file-formats",
+              "analyses/visualizations-and-reports",
+              "analyses/session-persistence"
+            ]
+          },
+          {
+            "group": "Skills",
+            "pages": [
+              "skills/overview",
+              "skills/pre-built-skills",
+              "skills/custom-skills"
+            ]
+          },
+          {
+            "group": "Security & Compliance",
+            "pages": [
+              "security/data-privacy",
+              "security/gdpr-and-dpa",
+              "security/bring-your-own-llm"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Plans & Support",
+        "groups": [
+          {
+            "group": "Plans",
+            "pages": [
+              "plans/overview",
+              "plans/enterprise"
+            ]
+          },
+          {
+            "group": "Support",
+            "pages": [
+              "support/faq",
+              "support/contact"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Natural language bioinformatics analysis — describe your research question in plain English",
+    "Autonomous multi-stage pipeline execution with self-healing code",
+    "207+ pre-built skills for tools like AlphaFold, Scanpy, AutoDock Vina, and more",
+    "Custom skill creation to capture lab-specific protocols and preferences",
+    "Native support for FASTQ, VCF, BAM, H5AD, CSV, and other standard formats",
+    "Publication-ready visualizations including volcano plots, heatmaps, and bar charts",
+    "Literature-grounded insights from PubMed, UniProt, and NCBI",
+    "Session persistence for long-running analyses",
+    "Built-in reproducibility — every workflow preserves context, steps, and outputs",
+    "GDPR-compliant EU infrastructure with zero-retention AI and sandbox isolation",
+    "Bring-your-own LLM and on-premise deployment options"
+  ],
+  "publicApiSurface": [
+    "Project workspace",
+    "File upload (CSV, FASTQ, VCF, BAM, H5AD)",
+    "Natural language analysis prompt",
+    "Skills catalogue (207 pre-built tool and workflow skills)",
+    "Custom skill creation interface",
+    "Visualization output (bar charts, volcano plots, heatmaps)",
+    "Session persistence and resumption",
+    "LLM model selector",
+    "Custom LLM connector (Starter and above)",
+    "Enterprise SSO and multi-user shared workspaces"
+  ]
+}

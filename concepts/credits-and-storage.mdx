@@ -1,0 +1,99 @@
+---
+title: "Credits and storage: understanding usage and limits"
+description: "Credits power every AI analysis call in Galagos. Learn how credits are consumed, what each plan includes, and how to make them last longer."
+---
+
+Credits are the unit of consumption for AI-powered analysis in Galagos. Each time Galagos makes an inference call — to plan a workflow, run a skill, or interpret results — it draws from your credit balance. Storage is separate and is measured per project, not per account. Understanding both helps you plan your work and choose the right plan.
+
+## Credits
+
+### What consumes a credit
+
+A credit is spent each time Galagos calls the underlying language model. In practice, this happens when you:
+
+- Send a new analysis request
+- Ask Galagos to re-plan or revise a workflow
+- Request a summary or interpretation of results
+
+Simple follow-up questions within an ongoing analysis typically consume fewer credits than starting a new, complex workflow from scratch.
+
+### Credit allotments by plan
+
+| Plan             | Price       | Credits included         |
+| ---------------- | ----------- | ------------------------ |
+| Individual       | Free (beta) | 20 credits (one-time)    |
+| Starter          | €35/month   | 50 credits/month         |
+| Advanced         | €90/month   | 120 credits/month        |
+| Professional     | €150/month  | 200 credits/month        |
+| Enterprise       | Custom      | Pooled compute credits   |
+
+<Warning>
+  Credits do not roll over to the next billing period. Any unused credits at the end of the month are forfeited. Plan your analyses accordingly — or upgrade if you consistently run out before renewal.
+</Warning>
+
+### What happens when you run out of credits
+
+If your balance reaches zero mid-analysis, the current job stops. Galagos saves the state of the workflow so you do not lose progress, but no new inference calls are made until your balance is restored.
+
+To resume, you can:
+
+- **Wait for your monthly renewal** — credits reset at the start of your next billing cycle
+- **Upgrade your plan** — a higher plan tier gives you a larger monthly allotment immediately
+
+<Card title="Compare plans and upgrade" icon="credit-card" href="/plans/overview">
+  See full plan details and upgrade your account to increase your monthly credit allotment.
+</Card>
+
+### Tips for using credits efficiently
+
+<AccordionGroup>
+  <Accordion title="Be specific in your prompts">
+    A precise request — "run DESeq2 on my two-condition RNA-seq data with default parameters and produce a volcano plot" — requires fewer planning iterations than a vague one like "analyze my data." The more context you give upfront, the less back-and-forth Galagos needs to clarify your intent.
+  </Accordion>
+  <Accordion title="Use pre-built skills instead of open-ended requests">
+    Pre-built skills have their parameters and pipeline steps pre-defined. When you invoke a skill directly (e.g., "run the STAR alignment skill on sample_1.fastq"), Galagos skips the planning phase and goes straight to execution, saving credits that would otherwise be spent on workflow design.
+  </Accordion>
+  <Accordion title="Batch your questions">
+    If you have several questions about the same dataset, ask them together in a single prompt rather than as separate messages. Galagos can address multiple sub-tasks in one inference pass.
+  </Accordion>
+  <Accordion title="Review results before re-running">
+    Check the output of each step before asking Galagos to continue. Catching a parameter mistake early — before a long downstream pipeline runs — avoids consuming credits on work you will discard.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Storage
+
+### How storage is measured
+
+Storage is measured per project. Each project on your account has its own quota — uploading a 5 GB file to project A does not affect project B's available space.
+
+### Storage limits by plan
+
+| Plan           | Storage per project |
+| -------------- | ------------------- |
+| Individual     | 10 GB               |
+| Starter        | 25 GB               |
+| Advanced       | 50 GB               |
+| Professional   | 100 GB              |
+| Enterprise     | Custom              |
+
+### Managing storage
+
+<Tip>
+  Intermediate files — such as sorted BAM files produced during alignment — are often the largest outputs and are rarely needed after downstream analysis completes. Deleting them once you have confirmed your results is the fastest way to recover space.
+</Tip>
+
+To see what is using your project's storage, open the project, click **Files**, and sort by size. You can delete individual files or bulk-select them from that view.
+
+If you need more storage than your current plan allows, upgrading your plan increases the per-project quota across all your projects.
+
+<CardGroup cols={2}>
+  <Card title="Uploading files" icon="upload" href="/analyses/uploading-files">
+    Supported file formats and upload limits.
+  </Card>
+  <Card title="Plans overview" icon="credit-card" href="/plans/overview">
+    Compare plans and upgrade to increase credits or storage.
+  </Card>
+</CardGroup>

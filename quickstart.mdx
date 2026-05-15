@@ -1,0 +1,85 @@
+---
+title: "Quickstart: run your first analysis in under an hour"
+description: "Get from a raw data file to a publication-ready report on the free Individual plan — no credit card, no code, and no pipeline configuration required."
+---
+
+This guide walks you through your first end-to-end analysis on Galagos. You will create a free account, upload a file, describe your research question in plain English, and receive a structured report with visualizations — all without writing a single line of code.
+
+<Tip>
+  The free Individual plan includes 20 one-time credits, which is enough to run several complete analyses. No credit card is required to sign up.
+</Tip>
+
+<Steps>
+  <Step title="Create a free account">
+    Go to [galagos.ai/register](https://galagos.ai/register) and sign up with your email address or Google account. No credit card is required for the free Individual plan.
+
+    Once you confirm your email, you will land on the Galagos dashboard.
+  </Step>
+
+  <Step title="Create your first project">
+    From the dashboard, click **New project** and give it a name that reflects your dataset or research question — for example, "RNA-seq pilot study".
+
+    A project is the persistent workspace that holds all of your files, analyses, and outputs together. You can have up to 5 active projects on the free plan.
+  </Step>
+
+  <Step title="Upload a file">
+    Inside your project, click **Upload files** and select your data. Galagos accepts the following formats natively:
+
+    | Format | Typical use case |
+    |--------|-----------------|
+    | FASTQ  | Raw sequencing reads |
+    | VCF    | Variant call data |
+    | BAM    | Aligned sequencing reads |
+    | H5AD   | Single-cell expression data |
+    | CSV    | Tabular data and metadata |
+
+    <Note>
+      Files are uploaded into your project's isolated storage. They are never used to train models or shared outside your workspace.
+    </Note>
+  </Step>
+
+  <Step title="Describe your research question">
+    Once your file is uploaded, type your question into the analysis prompt. Write it the same way you would explain the task to a colleague — plain English works best.
+
+    A concrete example:
+
+    > Perform differential gene expression analysis comparing treatment vs control groups. Use DESeq2 and generate a volcano plot highlighting genes with adjusted p-value below 0.05 and log2 fold change greater than 1.
+
+    Galagos reads your prompt, plans the workflow, selects the appropriate tools from its library of 207+ pre-built skills, and begins execution automatically.
+
+    <Info>
+      You do not need to name specific tools unless you have a preference. Galagos selects the right methods based on your file type and question.
+    </Info>
+  </Step>
+
+  <Step title="Review your results">
+    When the analysis completes, Galagos presents a structured report that includes:
+
+    - **Visualizations** — volcano plots, heatmaps, bar charts, and other figures appropriate to your analysis
+    - **Summary findings** — a written interpretation of the key results
+    - **Literature-grounded context** — supporting evidence pulled from PubMed, UniProt, and NCBI
+    - **Audit trail** — every step, tool, and parameter used in the workflow
+
+    If a step encounters an error, Galagos detects the failure and attempts an alternative approach automatically before surfacing a result.
+  </Step>
+
+  <Step title="Download or share your results">
+    From the results view, click **Download report** to export the full report and figures. You can also share a project link with collaborators who have a Galagos account.
+
+    Every project preserves its context, steps, and outputs so the analysis is fully reproducible — by you or anyone you share it with.
+  </Step>
+</Steps>
+
+## Next steps
+
+<CardGroup cols={3}>
+  <Card title="Uploading files" icon="upload" href="/analyses/uploading-files">
+    Learn about file size limits, supported formats, and how to organize data across projects.
+  </Card>
+  <Card title="Skills overview" icon="wand-magic-sparkles" href="/skills/overview">
+    Browse the 207+ pre-built skills and learn how to create custom skills for your lab's workflows.
+  </Card>
+  <Card title="Credits and storage" icon="coins" href="/concepts/credits-and-storage">
+    Understand how credits are consumed and what counts against your project storage quota.
+  </Card>
+</CardGroup>

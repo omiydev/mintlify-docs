@@ -1,0 +1,52 @@
+---
+title: "Supported file formats for Galagos analyses"
+description: "A complete reference of every file format Galagos can ingest, with extensions, typical use cases, and notes on compression and tool compatibility."
+---
+
+Galagos natively handles five bioinformatics file formats. Each format is parsed and validated when you upload it, so the tools Galagos selects during an analysis always receive correctly structured input.
+
+## Format reference
+
+| Format | Extension | Use case | Notes |
+|--------|-----------|----------|-------|
+| CSV | `.csv` | General tabular data: gene expression count matrices, sample metadata, differential expression results | Column headers are required. Galagos infers the delimiter; standard comma separation is recommended. |
+| FASTQ | `.fastq`, `.fastq.gz` | Raw sequencing reads from RNA-seq, whole-genome sequencing (WGS), and whole-exome sequencing (WES) | Gzip-compressed `.fastq.gz` files are preferred — they upload faster and consume less storage. Paired-end reads should be uploaded as separate R1 and R2 files. |
+| VCF | `.vcf`, `.vcf.gz` | Variant call files containing SNPs, indels, and structural variants from genomic samples | Both uncompressed and bgzipped (`.vcf.gz`) files are accepted. Galagos supports VCF 4.1 and 4.2. |
+| BAM | `.bam` | Aligned sequencing reads produced by aligners such as BWA-MEM, STAR, or HISAT2 | BAM files must be coordinate-sorted. Galagos accepts BAM files with or without an accompanying `.bai` index; if no index is present, one is generated automatically. |
+| H5AD | `.h5ad` | Single-cell RNA-seq and multi-omics data in AnnData format, used by Scanpy and related Python tools | H5AD is the recommended format for single-cell workflows. Galagos preserves `obs`, `var`, `obsm`, and `uns` slots during processing. |
+
+## Tips for choosing the right format
+
+<AccordionGroup>
+  <Accordion title="Which format should I use for RNA-seq data?">
+    It depends on the stage of your analysis. Use **FASTQ** if you want Galagos to run the full pipeline from raw reads (alignment, quantification, QC). Use **CSV** if you already have a count matrix and want to start directly from differential expression or downstream analysis.
+  </Accordion>
+  <Accordion title="Should I upload raw BAM files or processed counts?">
+    Upload **BAM** files if you need variant calling (e.g., GATK HaplotypeCaller) or if you want Galagos to handle quantification from aligned reads. Upload a **CSV** count matrix if quantification is already done and you want to move straight to statistical analysis.
+  </Accordion>
+  <Accordion title="What is H5AD and when should I use it?">
+    H5AD is the on-disk format for [AnnData](https://anndata.readthedocs.io) objects used in the Scanpy ecosystem. Use it for single-cell RNA-seq workflows — clustering, dimensionality reduction, trajectory analysis, and cell-type annotation. If your data is currently in a Seurat RDS file or a 10x MEX directory, convert it to H5AD before uploading or contact support for conversion guidance.
+  </Accordion>
+  <Accordion title="Can I upload compressed files?">
+    Yes. `.fastq.gz` and `.vcf.gz` are both accepted and recommended to reduce upload time and storage usage. Do not use zip archives (`.zip`) — upload the files directly.
+  </Accordion>
+</AccordionGroup>
+
+## Data pseudonymization requirement
+
+<Warning>
+  Any file derived from human biological samples — including FASTQ reads, BAM alignments, VCF variant calls, and metadata CSVs containing patient or donor information — must be pseudonymized before upload. This is a GDPR requirement. Galagos does not perform pseudonymization on your behalf.
+</Warning>
+
+Pseudonymization means replacing all direct identifiers (names, national ID numbers, hospital record numbers, or any other data that could identify an individual) with opaque tokens before the file leaves your institution. For guidance, see [Uploading files — Data privacy and GDPR requirements](/analyses/uploading-files#data-privacy-and-gdpr-requirements).
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Upload files" icon="upload" href="/analyses/uploading-files">
+    Step-by-step instructions for getting your data into a project sandbox.
+  </Card>
+  <Card title="Run an analysis" icon="play" href="/analyses/running-an-analysis">
+    Describe your research question and let Galagos plan and execute the workflow.
+  </Card>
+</CardGroup>

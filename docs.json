@@ -1,0 +1,94 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Galagos",
+  "theme": "luma",
+  "favicon": "https://media.brand.dev/f2cb0243-edd6-4985-b9ed-7ff41377f7a1.png",
+  "colors": {
+    "primary": "#eb550d"
+  },
+  "fonts": {
+    "heading": {
+      "family": "JetBrains Mono"
+    },
+    "body": {
+      "family": "Plus Jakarta Sans"
+    }
+  },
+  "navbar": {
+    "primary": {
+      "type": "button",
+      "label": "Sign Up Free",
+      "href": "https://galagos.ai/register"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "account-setup"
+            ]
+          },
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "concepts/projects",
+              "concepts/skills",
+              "concepts/credits-and-storage"
+            ]
+          },
+          {
+            "group": "Running Analyses",
+            "pages": [
+              "analyses/uploading-files",
+              "analyses/running-an-analysis",
+              "analyses/supported-file-formats",
+              "analyses/visualizations-and-reports",
+              "analyses/session-persistence"
+            ]
+          },
+          {
+            "group": "Skills",
+            "pages": [
+              "skills/overview",
+              "skills/pre-built-skills",
+              "skills/custom-skills"
+            ]
+          },
+          {
+            "group": "Security & Compliance",
+            "pages": [
+              "security/data-privacy",
+              "security/gdpr-and-dpa",
+              "security/bring-your-own-llm"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Plans & Support",
+        "groups": [
+          {
+            "group": "Plans",
+            "pages": [
+              "plans/overview",
+              "plans/enterprise"
+            ]
+          },
+          {
+            "group": "Support",
+            "pages": [
+              "support/faq",
+              "support/contact"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

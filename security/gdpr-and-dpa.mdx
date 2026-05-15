@@ -1,0 +1,80 @@
+---
+title: "GDPR compliance and Data Processing Agreement"
+description: "Understand your obligations as Data Controller, Galagos's role as Data Processor, subprocessors, and how data deletion works."
+---
+
+Galagos GmbH enters into a Data Processing Agreement (DPA) with every customer to formalise the obligations of both parties under the General Data Protection Regulation (GDPR). The DPA took effect on 19 August 2025 and applies to all personal data you submit to the platform.
+
+## Roles under the DPA
+
+The GDPR distinguishes between the entity that determines the purposes of processing (the Data Controller) and the entity that carries out processing on their behalf (the Data Processor).
+
+- **You are the Data Controller.** You decide what data is submitted to Galagos and for what research purpose.
+- **Galagos GmbH is your Data Processor.** Galagos processes your data only to provide the services you request and only on your documented instructions.
+
+## Your obligations as Data Controller
+
+Before submitting any personal data to Galagos, you must satisfy the following requirements.
+
+<Warning>
+  Do not upload data containing direct personal identifiers. Names, standard dates of birth, national identification numbers, contact information, and similar identifiers must be removed before upload. All biological, genetic, or health data must be strictly pseudonymized or anonymized first.
+</Warning>
+
+<Steps>
+  <Step title="Establish a valid legal basis">
+    Identify and document a valid legal basis under GDPR Article 6 for any personal data you submit. If your data includes special-category data — biological, genetic, or health data — you must also satisfy one of the conditions in GDPR Article 9 (for example, explicit consent or scientific research purposes under Article 9(2)(j)).
+  </Step>
+  <Step title="Pseudonymize or anonymize sensitive data">
+    Remove or replace all direct personal identifiers from biological, genetic, and health data before uploading to Galagos. At minimum, this means removing: names, standard dates of birth, contact details (email, phone, address), national identification numbers, and any other information that could directly identify a data subject without additional information.
+  </Step>
+  <Step title="Provide required privacy notices">
+    Ensure that affected data subjects have received the privacy notices required under GDPR Article 13 or 14, and that you have obtained any required consents before their data is submitted for processing.
+  </Step>
+</Steps>
+
+## Galagos's obligations as Data Processor
+
+Under the DPA, Galagos commits to:
+
+- Process personal data only on your documented instructions.
+- Ensure that all personnel with access to personal data are bound by confidentiality obligations.
+- Implement appropriate technical and organisational security measures.
+- Assist you in responding to data subject rights requests (access, erasure, portability, rectification).
+- Notify you without undue delay in the event of a personal data breach.
+- Make available all information necessary to demonstrate compliance with the DPA.
+
+## Subprocessors
+
+Galagos uses the following subprocessors to deliver the platform. Each subprocessor is bound by data processing agreements consistent with GDPR requirements.
+
+| Subprocessor | Service | Processing location |
+|---|---|---|
+| Hetzner Online GmbH | Cloud infrastructure and storage | Germany |
+| Hetzner Online GmbH | Cloud infrastructure and storage | Finland |
+| Google Cloud (Vertex AI) | LLM inference | EU |
+| OpenAI | LLM inference (EU only) | EU |
+| Anthropic | LLM inference (EU only) | EU |
+
+<Note>
+  OpenAI and Anthropic process data under zero-retention APIs and Standard Contractual Clauses (SCCs) to ensure GDPR-compliant transfers. All LLM inference for Galagos customers is routed to EU endpoints only.
+</Note>
+
+## Data retention and deletion
+
+Galagos retains your data for as long as your account is active. Upon account termination:
+
+- Galagos will securely delete all personal data associated with your account, or return it to you if you request this before termination.
+- Deletion is applied to all copies held by Galagos and, where contractually required, by its subprocessors.
+
+## DPA questions and requests
+
+If you have questions about the DPA, need a signed copy, or have a data subject rights request to route through Galagos, contact us at [contact@galagos.ai](mailto:contact@galagos.ai).
+
+<CardGroup cols={2}>
+  <Card title="Data privacy overview" icon="shield-halved" href="/security/data-privacy">
+    Technical details on encryption, sandbox isolation, and EU infrastructure.
+  </Card>
+  <Card title="Bring Your Own LLM" icon="microchip" href="/security/bring-your-own-llm">
+    Use your own LLM provider or deploy Galagos on-premise for stricter data control.
+  </Card>
+</CardGroup>

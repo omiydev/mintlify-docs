@@ -1,0 +1,54 @@
+---
+title: "Skills overview: how Galagos selects and applies tools"
+description: "Discover how skills power every Galagos analysis — from automatic tool selection and workflow orchestration to custom lab protocols and team libraries."
+---
+
+Skills are reusable building blocks that tell Galagos how to use specific bioinformatics software or orchestrate multi-step scientific procedures. Every time you run an analysis, Galagos draws on one or more skills to plan its approach, select the right tools, and apply the right parameters — without requiring you to configure anything manually.
+
+## Two types of skills
+
+<Columns cols={2}>
+  <Card title="Tool skills" icon="wrench">
+    Teach Galagos how to use a specific piece of software. A Tool skill encodes the tool's interface, recommended parameters, and how to interpret its output. Examples include AlphaFold for protein structure prediction, DESeq2 for differential expression, and BLAST for sequence similarity search.
+  </Card>
+  <Card title="Workflow skills" icon="diagram-project">
+    Orchestrate a complete multi-step scientific procedure. A Workflow skill chains together multiple tools in a defined order. Examples include a standard RNA-seq pipeline (alignment → quantification → differential expression analysis), a literature review, or a replication study.
+  </Card>
+</Columns>
+
+## Automatic discovery
+
+You don't need to know which skills exist or manually select them before running an analysis. Galagos includes a skill-finder that indexes the full skill catalogue and runs in the background while you type your prompt. As you describe your research question, it proactively identifies and applies the most relevant skills — so the right tools are always chosen automatically.
+
+<Info>
+  The skill-finder operates continuously as you type. By the time you submit your prompt, Galagos has already identified the most relevant skills for your analysis.
+</Info>
+
+## Pre-built skill catalogue
+
+Galagos ships with **207 pre-built skills** covering the most widely used tools and workflows in bioinformatics — from structural biology and single-cell analysis to variant calling and sequence alignment. These skills are maintained and updated by the Galagos team.
+
+## Custom skills
+
+If you have a preferred analysis approach — specific tools, parameter settings, or interpretation logic your lab relies on — you can capture it as a custom skill. Custom skills are private to your account and reusable across any project.
+
+<Note>
+  Custom skills are private to your account. Team Skill Libraries, which will let you share skills across your organization, are coming soon.
+</Note>
+
+## Team Skill Libraries
+
+<Info>
+  **Coming soon.** Team Skill Libraries will let you share skills across your team or organization. Proven protocols stay in the platform when people leave, and new team members can run your lab's standard analyses from day one.
+</Info>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Pre-built skills" icon="layer-group" href="/skills/pre-built-skills">
+    Browse the 207 pre-built skills organized by category, including structural biology, RNA-seq, variant analysis, and more.
+  </Card>
+  <Card title="Custom skills" icon="gear" href="/skills/custom-skills">
+    Learn how to create a custom skill that captures your lab's preferred tools, parameters, and pipeline steps.
+  </Card>
+</CardGroup>

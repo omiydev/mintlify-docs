@@ -1,0 +1,77 @@
+---
+title: "Session persistence for long-running analyses"
+description: "Galagos automatically saves your analysis state so you can close the browser and return later without losing progress, context, or intermediate results."
+---
+
+When you start an analysis, Galagos saves its state continuously in the background. You do not need to keep your browser open. Close the tab, shut your laptop, or switch to a different task — when you return to your project, the analysis will be exactly where you left it.
+
+## What gets saved
+
+Session persistence covers every part of your working state:
+
+- **Chat history**: every message you sent and every response Galagos produced, in order
+- **Uploaded files**: all files in the project sandbox remain intact between sessions
+- **Intermediate results**: outputs produced by completed steps are stored and available to subsequent steps when the analysis resumes
+- **Workflow steps**: the full plan Galagos generated — the tools called, the parameters used, and the sequence of operations — is recorded so the workflow can be inspected or repeated exactly
+- **Analysis context**: Galagos retains the context of the current conversation, so you can ask follow-up questions about a result days after the original analysis finished
+
+## How to resume an analysis
+
+<Steps>
+  <Step title="Close the browser when needed">
+    You can close the Galagos tab at any point — before, during, or after an analysis. If an analysis is running, Galagos continues executing in the background.
+  </Step>
+  <Step title="Return to Galagos">
+    Open Galagos and log in. From the dashboard, click the project you were working in.
+  </Step>
+  <Step title="Check the status">
+    The chat shows the current status of any running analysis. If it is still in progress, you see a live progress trace. If it has finished, the completed report is waiting for you.
+  </Step>
+  <Step title="Continue your work">
+    You can ask follow-up questions, start a new analysis in the same project, or download the results — all from the same chat interface with full context restored.
+  </Step>
+</Steps>
+
+<Note>
+  Long-running analyses — such as AlphaFold structure prediction, whole-genome alignment, or large-scale single-cell clustering — can take several hours to complete. You do not need to keep your browser open during this time. Galagos will have the results ready when you return.
+</Note>
+
+## Built-in reproducibility
+
+Storing the full workflow context is not just a convenience feature — it is the foundation of reproducibility. Because Galagos records every tool call, every parameter, and every intermediate output, you or a colleague can:
+
+- **Repeat the analysis exactly**: rerun the same workflow on the same files and get the same results
+- **Audit the steps**: review what Galagos did at each stage and verify the parameters match your intended methodology
+- **Share the workflow**: colleagues who have access to the project can open the same chat and see the complete history
+
+<Tip>
+  If you want to run the same analysis on a different dataset, describe it in a new message in the same chat. Galagos carries forward the workflow structure and adapts it to the new input.
+</Tip>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What happens if my internet connection drops while an analysis is running?">
+    Galagos runs analyses server-side, so a dropped connection does not interrupt the workflow. When you reconnect and return to the project, the analysis continues or has finished, depending on how long you were disconnected.
+  </Accordion>
+  <Accordion title="Is there a time limit on how long a session can be paused?">
+    Sessions persist for as long as your project exists and your account is active. There is no timeout that will discard a running or completed analysis.
+  </Accordion>
+  <Accordion title="Can I have multiple analyses running in the same project at the same time?">
+    Yes. You can start a new analysis in the chat while a previous one is still running. Each analysis tracks its own workflow state independently within the project.
+  </Accordion>
+  <Accordion title="Will intermediate files from a paused analysis be deleted?">
+    No. Intermediate outputs are stored in your project sandbox and count toward your storage quota. They remain available until you delete the project or the individual files.
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Visualizations and reports" icon="chart-bar" href="/analyses/visualizations-and-reports">
+    See what outputs Galagos generates and how to download them.
+  </Card>
+  <Card title="Running an analysis" icon="play" href="/analyses/running-an-analysis">
+    Learn how to write prompts and interpret the workflow trace in the chat.
+  </Card>
+</CardGroup>

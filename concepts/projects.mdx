@@ -1,0 +1,102 @@
+---
+title: "Projects: isolated workspaces for your analyses"
+description: "Learn how Galagos projects organize your files and analyses in an isolated sandbox, with per-plan storage limits, session persistence, and reproducibility."
+---
+
+A project is the central workspace where you upload data, run analyses, and store results in Galagos. Every project gets its own isolated sandbox environment, separate file storage, and a full history of every workflow you have run — so your work stays organized and reproducible from the first file upload to the final report.
+
+## Creating a project
+
+<Steps>
+  <Step title="Open the Projects dashboard">
+    Log in to Galagos and click **Projects** in the left sidebar. You will see all your active projects listed here.
+  </Step>
+  <Step title="Create a new project">
+    Click **New Project** in the top-right corner. Give your project a descriptive name — for example, "RNA-seq cohort A, batch 3" — so you can find it easily later.
+  </Step>
+  <Step title="Upload your files">
+    Drag and drop your data files into the project, or click **Upload Files** to browse. Galagos accepts FASTQ, BAM, VCF, H5AD, CSV, and [many other formats](/analyses/supported-file-formats).
+  </Step>
+  <Step title="Start your analysis">
+    Type your research question in the chat input. Galagos selects the right skills, plans the workflow, and begins the analysis inside your project's sandbox.
+  </Step>
+</Steps>
+
+## Storage limits by plan
+
+Each project has its own storage quota. The limit applies per project, not per account — so a Starter plan user with 5 projects can store up to 25 GB in each one.
+
+| Plan           | Storage per project |
+| -------------- | ------------------- |
+| Individual     | 10 GB               |
+| Starter        | 25 GB               |
+| Advanced       | 50 GB               |
+| Professional   | 100 GB              |
+| Enterprise     | Custom              |
+
+<Tip>
+  If you are approaching your storage limit, download and archive result files you no longer need to free up space. Intermediate outputs — such as alignment BAMs — are often the largest consumers.
+</Tip>
+
+## Active project limits
+
+Your plan also sets a cap on how many projects you can have open at the same time.
+
+| Plan                       | Active projects |
+| -------------------------- | --------------- |
+| Individual                 | 5               |
+| Starter                    | 10              |
+| Advanced                   | 10              |
+| Professional               | 10              |
+| Enterprise                 | Custom          |
+
+<Note>
+  Archiving a project frees up one slot toward your active project limit without deleting any of its files or results.
+</Note>
+
+## Session persistence
+
+You do not need to finish an analysis in a single sitting. Galagos automatically saves your work — including the current workflow state, any intermediate outputs, and the full conversation history — so you can close the browser tab and return exactly where you left off.
+
+When you reopen a project, the sandbox environment resumes in the same state. Long-running jobs (such as genome alignment or protein structure prediction) continue in the background even if you disconnect.
+
+## Reproducibility
+
+Every workflow in a project preserves its complete context: the input files, the steps Galagos executed, the parameters it used, and the outputs it produced. This means you can:
+
+- Re-run an analysis with the same inputs to confirm results
+- Share the project with a colleague so they can inspect every step
+- Audit a workflow at any point — including months after it completed
+
+<Info>
+  Reproducibility relies on the full workflow record staying inside the project. Avoid moving or deleting input files until you are certain the analysis is complete and reviewed.
+</Info>
+
+## Project isolation
+
+Each project runs in its own containerized sandbox. Files, processes, and environment variables from one project cannot access or interfere with another. This isolation means:
+
+- A misconfigured analysis in one project cannot corrupt data in another
+- You can run different tool versions across projects without conflicts
+- Your data never mixes with another user's workloads
+
+<Warning>
+  Do not paste credentials, API keys, or passwords directly into uploaded files or analysis prompts. If your analysis requires external credentials, contact [support](/support/contact) for guidance on how to provide them securely.
+</Warning>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Uploading files" icon="upload" href="/analyses/uploading-files">
+    Supported formats and best practices for getting data into a project.
+  </Card>
+  <Card title="Running an analysis" icon="flask" href="/analyses/running-an-analysis">
+    How to prompt Galagos and interpret the results it returns.
+  </Card>
+  <Card title="Credits and storage" icon="coins" href="/concepts/credits-and-storage">
+    Understand how credits are consumed and how storage is metered.
+  </Card>
+  <Card title="Plans overview" icon="credit-card" href="/plans/overview">
+    Compare plans and upgrade to increase storage or project limits.
+  </Card>
+</CardGroup>

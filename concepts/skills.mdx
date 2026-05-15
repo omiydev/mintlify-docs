@@ -1,0 +1,77 @@
+---
+title: "Skills: building blocks for every Galagos analysis"
+description: "Understand what skills are, the difference between tool and workflow skills, how automatic discovery works, and when to create a custom skill for your lab."
+---
+
+Skills are the reusable building blocks that power every analysis in Galagos. Each skill encodes knowledge about a specific piece of software or a multi-step scientific procedure — the parameters it accepts, how to interpret its output, and how it fits into a broader workflow. When you describe your research question, Galagos selects and combines the right skills automatically.
+
+## Two types of skills
+
+<Tabs>
+  <Tab title="Tool skills">
+    Tool skills teach Galagos how to use a specific bioinformatics application. Each skill bundles the tool's configuration, parameter defaults, and output interpretation logic so Galagos can run it correctly and explain the results in plain language.
+
+    **Examples of tool skills:**
+
+    | Skill | Use case |
+    | ----- | -------- |
+    | AlphaFold | Protein structure prediction from amino acid sequence |
+    | Scanpy | Single-cell RNA-seq analysis and clustering |
+    | AutoDock Vina | Molecular docking and binding affinity estimation |
+    | DESeq2 | Differential gene expression analysis |
+    | STAR | RNA-seq read alignment to a reference genome |
+    | BLAST | Sequence similarity search against reference databases |
+
+    When you ask Galagos to predict protein structure, it automatically discovers and applies the AlphaFold skill — selecting appropriate parameters for your input and summarizing the confidence scores in the output.
+  </Tab>
+  <Tab title="Workflow skills">
+    Workflow skills orchestrate multi-step scientific procedures that span multiple tools or data sources. They encode the logic of an entire analytical pipeline, not just a single application.
+
+    **Examples of workflow skills:**
+
+    - **Literature review**: searches PubMed, extracts relevant findings, and synthesizes a structured summary grounded in recent publications
+    - **Replication study**: takes an existing published protocol and re-runs it on your data, comparing your results against the reference
+    - **Variant annotation pipeline**: aligns reads, calls variants, and annotates each call against clinical databases in one request
+
+    Workflow skills are especially useful for complex tasks where the sequence of steps and the hand-off between tools matters as much as the tools themselves.
+  </Tab>
+</Tabs>
+
+## Automatic skill discovery
+
+You do not need to know which skill to use before you start. Galagos includes a skill-finder that indexes the full catalogue and proactively suggests relevant skills as you describe your analysis.
+
+For example, if you type "I want to identify differentially expressed genes between my two conditions," the skill-finder will surface DESeq2, edgeR, and limma-voom as candidates and explain when each is the better choice for your data.
+
+<Info>
+  Automatic discovery works best when you include specifics in your prompt — the data type, the comparison you want to make, and any constraints (e.g., low sample size, paired design). The more context you provide, the more targeted the suggestions.
+</Info>
+
+## Pre-built skill catalogue
+
+Galagos ships with **207 pre-built skills** covering common workflows across genomics, proteomics, transcriptomics, structural biology, and cheminformatics. You can browse the full catalogue from any project by clicking **Skills** in the sidebar.
+
+<CardGroup cols={2}>
+  <Card title="Browse pre-built skills" icon="magnifying-glass" href="/skills/pre-built-skills">
+    Search and filter the full catalogue by domain, tool, or workflow type.
+  </Card>
+  <Card title="Skills overview" icon="wand-magic-sparkles" href="/skills/overview">
+    A guided tour of the skill system and how skills fit into the analysis flow.
+  </Card>
+</CardGroup>
+
+## Custom skills
+
+If your lab uses a bespoke protocol or a tool that is not yet in the catalogue, you can create your own skill. Custom skills use the same format as pre-built skills — you define the parameters, the pipeline steps, and the interpretation logic — and once created, they appear alongside the pre-built catalogue in the skill-finder.
+
+<Card title="Creating custom skills" icon="gear" href="/skills/custom-skills">
+  Step-by-step guide to writing, testing, and publishing a custom skill for your lab.
+</Card>
+
+## Team skill libraries
+
+<Note>
+  **Coming soon.** Team skill libraries will let you share custom skills across your lab or organization, so institutional expertise is preserved and every team member starts from the same validated baseline.
+</Note>
+
+Once available, a team admin will be able to publish skills to a shared library. Any member of the organization will be able to discover and apply those skills in their own projects — without needing to recreate the same configuration from scratch.

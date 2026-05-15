@@ -1,0 +1,89 @@
+---
+title: "Bring Your Own LLM provider to Galagos"
+description: "Connect your own LLM API key or deploy Galagos fully on-premise to meet stricter compliance, vendor, or cost requirements."
+---
+
+If your organisation has specific compliance requirements, a preferred LLM vendor, or a fine-tuned model you want to use for analysis, you can connect your own LLM provider to Galagos instead of — or alongside — the default providers. Enterprise customers can go further and deploy the entire Galagos platform on-premise.
+
+## Plan availability
+
+| Feature | Availability |
+|---|---|
+| Connect a custom LLM provider | Starter plan and above |
+| Full on-premise deployment | Enterprise plan |
+
+<Tip>
+  If you are evaluating Galagos for a regulated environment or an organisation with strict vendor approval processes, the Bring Your Own LLM feature lets you keep all AI processing within your existing approved infrastructure.
+</Tip>
+
+## Why use your own LLM
+
+<AccordionGroup>
+  <Accordion title="Stricter compliance requirements">
+    Some organisations require that all AI processing go through a vendor they have independently audited and approved. Connecting your own API key means LLM requests are governed entirely by your agreement with that provider.
+  </Accordion>
+  <Accordion title="Preferred or approved vendor">
+    Your procurement or legal team may have an existing relationship with a specific LLM provider. You can point Galagos at that provider without changing how you run analyses.
+  </Accordion>
+  <Accordion title="Cost management">
+    If your organisation already has a committed spend arrangement with an LLM provider, routing Galagos through your own API key lets you take advantage of that pricing rather than paying through Galagos credits.
+  </Accordion>
+  <Accordion title="Fine-tuned or specialised models">
+    If you have fine-tuned a model on domain-specific biological or clinical data, you can connect it to Galagos so your analyses benefit from that specialisation.
+  </Accordion>
+</AccordionGroup>
+
+## Supported providers
+
+Galagos accepts connections to any of the following provider types. These are the same providers Galagos uses internally.
+
+- **OpenAI-compatible APIs** — any endpoint that implements the OpenAI chat completions API, including self-hosted models served via compatible middleware
+- **Anthropic** — connect using your own Anthropic API key
+- **Google Cloud Vertex AI** — connect using your own Google Cloud project and Vertex AI credentials
+
+## How to connect a custom LLM
+
+<Steps>
+  <Step title="Open Settings">
+    From any page in the Galagos platform, click your account avatar in the top-right corner and select **Settings**.
+  </Step>
+  <Step title="Navigate to Model settings">
+    In the left sidebar, select **Model**.
+  </Step>
+  <Step title="Add a custom LLM">
+    Click **Add Custom LLM**. A configuration panel will appear.
+  </Step>
+  <Step title="Enter your provider credentials">
+    Select your provider type from the dropdown, then enter your API key (and, for Vertex AI, your project ID and region). Galagos does not store your API key in plain text — it is encrypted at rest.
+  </Step>
+  <Step title="Save and test">
+    Click **Save**. Galagos will send a test request to confirm the connection is working. Once confirmed, you can select your custom LLM as the default for new analyses or choose it on a per-analysis basis.
+  </Step>
+</Steps>
+
+## On-premise deployment
+
+Enterprise customers can deploy the entire Galagos platform within their own infrastructure — no data leaves your environment at all. On-premise deployment includes:
+
+- The full Galagos application stack deployed to your own servers or private cloud
+- Your choice of LLM provider, including air-gapped or locally hosted models
+- Dedicated setup and onboarding support from the Galagos team
+
+To discuss on-premise deployment, contact the Galagos team at [contact@galagos.ai](mailto:contact@galagos.ai).
+
+## Data handling with a custom LLM
+
+<Note>
+  When you connect your own LLM provider, data sent to that provider is governed by your agreement with them — not by the Galagos DPA. Review your provider's data retention and processing policies to confirm they meet your compliance requirements before connecting.
+</Note>
+
+Galagos still applies sandbox isolation and TLS encryption to all traffic regardless of which LLM provider you use. Your data does not leave the Galagos platform unencrypted.
+
+<CardGroup cols={2}>
+  <Card title="Data privacy overview" icon="shield-halved" href="/security/data-privacy">
+    Learn about Galagos's default security architecture, including zero-retention AI and EU infrastructure.
+  </Card>
+  <Card title="GDPR and Data Processing Agreement" icon="file-contract" href="/security/gdpr-and-dpa">
+    Understand how the DPA applies and what changes when you use your own LLM provider.
+  </Card>
+</CardGroup>

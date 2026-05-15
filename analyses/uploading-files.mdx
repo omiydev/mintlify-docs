@@ -1,0 +1,85 @@
+---
+title: "Upload files to your Galagos project"
+description: "Learn how to upload research data into a project sandbox, which formats are accepted, and how storage limits apply to your plan."
+---
+
+To run an analysis, you first need to get your data into Galagos. Files are uploaded into a project's isolated sandbox — each project has its own storage space, and files you upload are only accessible within that project.
+
+## How to upload files
+
+<Steps>
+  <Step title="Open your project">
+    From the Galagos dashboard, click the project you want to work in. If you haven't created a project yet, click **New project** and give it a name.
+  </Step>
+  <Step title="Navigate to the Files tab">
+    Inside your project, click the **Files** tab in the left sidebar. This shows all files currently stored in the project sandbox.
+  </Step>
+  <Step title="Upload your files">
+    Drag and drop your files onto the upload area, or click **Upload files** to open a file picker. You can upload multiple files at once.
+  </Step>
+  <Step title="Confirm the upload">
+    Galagos displays a progress indicator for each file. Once all files show a checkmark, they are ready to use in an analysis.
+  </Step>
+</Steps>
+
+<Tip>
+  You can also reference uploaded files by name when typing a prompt in the chat interface. For example: "Perform differential expression analysis on `counts.csv`."
+</Tip>
+
+## Supported file formats
+
+Galagos natively handles the following formats:
+
+| Format | Extension | Description |
+|--------|-----------|-------------|
+| CSV | `.csv` | General tabular data, including gene expression count tables and sample metadata |
+| FASTQ | `.fastq`, `.fastq.gz` | Raw sequencing reads from RNA-seq, whole-genome sequencing (WGS), or whole-exome sequencing (WES) workflows |
+| VCF | `.vcf`, `.vcf.gz` | Variant call format files containing SNPs, indels, and other genomic variants |
+| BAM | `.bam` | Aligned sequencing reads produced by aligners such as BWA or STAR |
+| H5AD | `.h5ad` | Single-cell data in AnnData format, used by Scanpy and related tools |
+
+For a detailed breakdown of each format and its intended use cases, see [Supported file formats](/analyses/supported-file-formats).
+
+## Storage limits by plan
+
+Each project counts toward your plan's total storage quota. The limits are:
+
+| Plan | Storage |
+|------|---------|
+| Individual | 10 GB |
+| Starter | 25 GB |
+| Advanced | 50 GB |
+| Professional | 100 GB |
+
+For more information on storage and how it is calculated, see [Credits and storage](/concepts/credits-and-storage).
+
+## Data privacy and GDPR requirements
+
+<Warning>
+  All biological or health data that can identify an individual — including raw sequencing reads, variant calls, and clinical metadata — **must be pseudonymized before upload**. This is required under GDPR and is your responsibility as the data controller.
+</Warning>
+
+Pseudonymization means replacing any direct identifiers (such as patient names, national ID numbers, or sample barcodes linked to identifiable individuals) with a code or token before the file leaves your institution. Galagos stores and processes the pseudonymized data, not the original identifiers.
+
+<AccordionGroup>
+  <Accordion title="What counts as personal health data?">
+    Under GDPR, genetic data and data concerning health are special categories of personal data. This includes raw sequencing reads (FASTQ, BAM), variant files (VCF) derived from human samples, and any metadata table containing patient or donor identifiers.
+  </Accordion>
+  <Accordion title="How should I pseudonymize my files?">
+    Replace identifying fields in metadata CSVs with opaque tokens (for example, replace `PatientID: Jane Doe` with `sample_id: S001`). For sequencing files, ensure read headers do not contain patient identifiers. Keep the mapping between tokens and real identities in a secure location at your institution.
+  </Accordion>
+  <Accordion title="Does Galagos process data outside the EU?">
+    See the [Data privacy and security](/security/data-privacy) page for details on data residency and subprocessor locations.
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Run an analysis" icon="play" href="/analyses/running-an-analysis">
+    Describe your research question in plain English and let Galagos plan and execute the workflow.
+  </Card>
+  <Card title="Supported file formats" icon="file-lines" href="/analyses/supported-file-formats">
+    See the full format reference, including notes on compression and tool compatibility.
+  </Card>
+</CardGroup>

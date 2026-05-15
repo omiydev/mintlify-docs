@@ -1,0 +1,112 @@
+---
+title: "Run a bioinformatics analysis with Galagos"
+description: "Type your research question in plain English and Galagos plans the workflow, selects the right tools, and runs the analysis end-to-end — no code required."
+---
+
+To start an analysis, open the chat interface inside your project and describe what you want to do in plain English. Galagos reads your question, plans a multi-step workflow, selects the appropriate tools and packages, and runs the analysis autonomously — surfacing results, visualizations, and literature-grounded insights directly in the chat.
+
+## How to start an analysis
+
+<Steps>
+  <Step title="Open your project">
+    From the Galagos dashboard, click into the project that contains your uploaded data. If your files are not yet uploaded, see [Uploading files](/analyses/uploading-files) first.
+  </Step>
+  <Step title="Type your research question">
+    Click the chat input at the bottom of the screen and describe your analysis in plain English. You can reference file names directly in your prompt.
+  </Step>
+  <Step title="Review the planned workflow">
+    Galagos displays the steps it plans to execute — the tools it will call, the parameters it will use, and the expected outputs. No manual approval is required; the analysis starts immediately.
+  </Step>
+  <Step title="Wait for results">
+    Galagos runs each step in sequence. Progress appears in the chat as each step completes. For long-running analyses, you can safely close the browser and return later — see [Session persistence](/analyses/session-persistence).
+  </Step>
+  <Step title="Review your results">
+    When the analysis finishes, Galagos presents a structured report with findings, visualizations, parameter summaries, and relevant literature references. You can ask follow-up questions in the same chat to drill deeper.
+  </Step>
+</Steps>
+
+<Tip>
+  Be specific in your prompts. Including the tool name, comparison groups, file name, and desired output leads to more accurate results. Vague prompts work, but precise ones work better.
+</Tip>
+
+## Example prompts
+
+The following prompts illustrate the range of analyses Galagos can run:
+
+<Tabs>
+  <Tab title="RNA-seq">
+    **Differential gene expression**
+
+    ```
+    Perform differential gene expression analysis comparing treatment vs control
+    groups using DESeq2 on counts.csv. Generate a volcano plot and a list of
+    significantly differentially expressed genes (padj < 0.05, |log2FC| > 1).
+    ```
+  </Tab>
+  <Tab title="Single-cell">
+    **Single-cell RNA-seq clustering**
+
+    ```
+    Perform single-cell RNA-seq clustering on data.h5ad and visualize the UMAP.
+    Identify marker genes for each cluster and annotate cell types.
+    ```
+  </Tab>
+  <Tab title="Variant calling">
+    **Variant calling from aligned reads**
+
+    ```
+    Call variants from sample.bam using GATK HaplotypeCaller. Filter for
+    high-confidence SNPs and indels and output a VCF file.
+    ```
+  </Tab>
+  <Tab title="Protein">
+    **Structure prediction and BLAST search**
+
+    ```
+    Predict the structure of this protein sequence using AlphaFold and
+    visualize the predicted structure.
+    ```
+
+    ```
+    Run a BLAST search for this protein sequence against UniProt and return
+    the top 20 hits with E-value, identity percentage, and alignment scores.
+    ```
+  </Tab>
+</Tabs>
+
+## What Galagos does during an analysis
+
+### Autonomous task completion
+
+Galagos plans and executes workflows without asking for approval at every step. It selects from 207+ pre-built bioinformatics packages — including DESeq2, GATK, Scanpy, AlphaFold, BLAST, and more — and chains the appropriate tools based on your question.
+
+### Self-healing code
+
+If a step fails — for example, because a tool encounters an unexpected input format or a parameter is out of range — Galagos automatically detects the error and attempts an alternative approach. You see the recovery steps in the chat so you always know what happened.
+
+### Literature-grounded insights
+
+Galagos pulls supporting scientific context from [PubMed](https://pubmed.ncbi.nlm.nih.gov), [UniProt](https://www.uniprot.org), and [NCBI](https://www.ncbi.nlm.nih.gov) to accompany its findings. References appear inline in the report alongside the results they support.
+
+## Interpreting the chat response
+
+As Galagos runs your analysis, the chat shows a live trace of the workflow. Each entry in the trace corresponds to one step: the tool called, the inputs used, and a brief summary of the output. When the analysis completes, a collapsible report appears with:
+
+- A summary of the analysis goal and approach
+- Parameters used at each step
+- Key findings and statistical results
+- Visualizations (plots, tables)
+- Literature references relevant to the findings
+
+You can ask follow-up questions — such as "Now compare just the top 50 genes" or "Run the same analysis with edgeR instead" — and Galagos will continue in the same session with full context of the previous steps.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Visualizations and reports" icon="chart-bar" href="/analyses/visualizations-and-reports">
+    Learn what types of plots Galagos generates and how to download your results.
+  </Card>
+  <Card title="Session persistence" icon="clock-rotate-left" href="/analyses/session-persistence">
+    Understand how Galagos saves long-running analyses so you can return later.
+  </Card>
+</CardGroup>

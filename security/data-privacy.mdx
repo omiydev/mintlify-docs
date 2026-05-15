@@ -1,0 +1,67 @@
+---
+title: "Data privacy and security on Galagos"
+description: "How Galagos protects your research data: zero-retention AI, sandbox isolation, EU-only infrastructure, and TLS encryption."
+---
+
+Galagos is built for research teams who handle sensitive biological and health data. Every layer of the platform — from how AI requests are routed to where your files are stored — is designed so your data stays private, stays in the EU, and is never used to train AI models.
+
+<Warning>
+  Galagos is not a medical device and does not provide medical, diagnostic, or regulatory advice. All results are for research purposes only and must be independently validated before any clinical or regulatory use.
+</Warning>
+
+## Zero-retention AI
+
+When you run an analysis, Galagos routes your request to enterprise-tier LLM APIs that operate under strict zero-retention agreements. Your data is never used to train or fine-tune any AI model — by Galagos or by its LLM providers.
+
+All requests are encrypted before transmission and routed only to the providers listed in the [Data Processing Agreement](/security/gdpr-and-dpa).
+
+## Sandbox isolation
+
+Every Galagos project runs in its own isolated, containerized environment. Your files, intermediate outputs, and analysis state cannot be read by, or leak into, any other project — including other projects within your own organisation. When a project environment is torn down, its filesystem is discarded.
+
+## EU-only infrastructure
+
+All data you upload to Galagos is stored and processed exclusively within the European Union. Galagos runs on dedicated, single-tenant root servers operated by Hetzner in Germany and Finland. Data never transits outside the EU.
+
+<Info>
+  Dedicated infrastructure means your data does not share physical or virtualised resources with other Galagos customers.
+</Info>
+
+## Encryption in transit
+
+All data transmitted between your browser and Galagos, and between Galagos and its LLM providers, is encrypted using TLS. There is no unencrypted path for data in motion.
+
+## LLM providers
+
+Galagos uses the following LLM providers. Each has been selected for its data handling guarantees and GDPR compliance posture.
+
+| Provider | Processing location | Data handling |
+|---|---|---|
+| Google Cloud Vertex AI | EU | EU-only inference; data processed within the EU |
+| OpenAI | EU inference only | Zero-retention API; Standard Contractual Clauses (SCCs) |
+| Anthropic | EU inference only | Zero-retention API; Standard Contractual Clauses (SCCs) |
+
+You can also connect your own LLM provider. See [Bring Your Own LLM](/security/bring-your-own-llm) for details.
+
+## Your responsibilities
+
+Galagos processes data on your behalf as a Data Processor. Before uploading any data, you are responsible for the following:
+
+<Warning>
+  Do not upload biological, genetic, or health data that contains direct personal identifiers — such as names, standard dates of birth, or contact information. All such data must be strictly pseudonymized or anonymized before upload.
+</Warning>
+
+- **Pseudonymize or anonymize all biological and health data** before uploading. Remove names, dates of birth, contact details, and any other direct identifiers.
+- **Establish a valid legal basis** under GDPR Article 6 and, where applicable, Article 9 before submitting any personal data.
+- **Provide required privacy notices** to data subjects and obtain any necessary consents.
+
+## Further reading
+
+<CardGroup cols={2}>
+  <Card title="GDPR and Data Processing Agreement" icon="file-contract" href="/security/gdpr-and-dpa">
+    Review your obligations as Data Controller and Galagos's formal DPA commitments.
+  </Card>
+  <Card title="Bring Your Own LLM" icon="microchip" href="/security/bring-your-own-llm">
+    Connect your own LLM provider or deploy Galagos entirely on-premise.
+  </Card>
+</CardGroup>

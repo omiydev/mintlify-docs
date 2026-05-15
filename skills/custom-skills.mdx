@@ -1,0 +1,60 @@
+---
+title: "Custom skills: encode your lab's analysis protocols"
+description: "Capture your preferred tools, parameter settings, and interpretation logic as a reusable custom skill that Galagos applies automatically to future analyses."
+---
+
+Custom skills let you capture your lab's preferred analysis approaches as reusable building blocks. Instead of re-specifying your tool choices, parameter thresholds, and interpretation logic every time you run an analysis, you define them once as a custom skill — and Galagos applies them automatically in every relevant analysis going forward.
+
+## What a custom skill defines
+
+A custom skill can encode any combination of the following:
+
+- **Preferred tools** — specify which aligner, caller, or analysis package to use
+- **Parameter settings** — lock in the exact flags, thresholds, and filtering criteria your lab relies on
+- **Pipeline steps** — define the sequence of operations and how outputs feed into subsequent steps
+- **Output formats** — specify how results should be structured or exported
+- **Interpretation logic** — guide how Galagos contextualises and narrates results
+
+## When to create a custom skill
+
+Custom skills are most valuable when your lab has established, repeatable protocols. Common examples include:
+
+<AccordionGroup>
+  <Accordion title="Lab-specific RNA-seq pipeline">
+    "Our standard RNA-seq pipeline always uses STAR for alignment with these specific parameters, featureCounts for quantification, and DESeq2 with our preferred filtering thresholds for differential expression."
+  </Accordion>
+  <Accordion title="Variant calling with in-house thresholds">
+    "For variant calling, always use GATK HaplotypeCaller followed by our lab's hard filtering criteria: QD &lt; 2.0, FS &gt; 60.0, MQ &lt; 40.0."
+  </Accordion>
+  <Accordion title="Single-cell analysis with consistent clustering settings">
+    "Run Scanpy with resolution 0.5 for Leiden clustering, exclude cells with fewer than 200 genes or more than 5% mitochondrial reads, and always produce a UMAP coloured by cell type."
+  </Accordion>
+</AccordionGroup>
+
+## How to create a custom skill
+
+<Steps>
+  <Step title="Navigate to the Skills section">
+    Open your project in Galagos and click **Skills** in the left sidebar.
+  </Step>
+  <Step title="Click Create Skill">
+    Click the **Create Skill** button in the top-right corner of the Skills section.
+  </Step>
+  <Step title="Define the skill name and description">
+    Give your skill a clear, descriptive name (for example, "Lab RNA-seq pipeline") and a short description of what it does and when Galagos should apply it.
+  </Step>
+  <Step title="Specify the tools, parameters, and steps">
+    Add the tools your skill uses, the parameters each tool should run with, and the order of pipeline steps. You can also define output format preferences and any interpretation logic.
+  </Step>
+  <Step title="Save and use the skill">
+    Click **Save**. Your custom skill is now available in all your projects. Galagos will apply it automatically when your prompt matches the skill's scope, or you can reference it directly in your prompt.
+  </Step>
+</Steps>
+
+## Privacy and sharing
+
+Custom skills are **private to your account** by default. Other users — including team members in the same organisation — cannot see or use your custom skills.
+
+<Note>
+  **Team Skill Libraries are coming soon.** This feature will let you share custom skills across your team or organization. Institutional protocols will stay in the platform when people leave, and new team members will be able to run your lab's proven analyses from day one.
+</Note>
