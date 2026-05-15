@@ -1,0 +1,150 @@
+---
+title: "Workspace library: share files across every project in a workspace"
+description: "Upload reference files, panels, and datasets once at the workspace level and pull them into any project. Works from the UI and from the chat — the agent can both bring library files into a project and save useful results back."
+---
+
+A workspace library is a shared bucket of files that every project in the same workspace can pull from. You upload a reference genome, a panel BED, a curated gene list, or a paper PDF once at the workspace level, and any project, present or future, can bring a copy in with one click — or by asking the agent. Useful results produced inside a project can flow back the same way, so the next analysis starts from a curated artifact rather than a re-derived intermediate.
+
+## What the library is for
+
+<CardGroup cols={2}>
+  <Card title="Reference data" icon="dna">
+    Genome FASTAs, BED panels, gene lists, ontology dumps. Files that every member of the lab needs in every project but that rarely change.
+  </Card>
+  <Card title="Curated artifacts" icon="folder-tree">
+    Cleaned datasets, processed inputs, finished reports. Save results from one project so the next analysis can start from the curated artifact instead of re-running the upstream steps.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Seed the library before you invite collaborators. The first thing a new teammate does is open a project and look for the lab's reference files.
+</Tip>
+
+## Uploading files to the library
+
+<Steps>
+  <Step title="Open the workspace library">
+    From the left sidebar of any workspace, click **Library**. You see every file already in the library, with name, size, type, and who uploaded it.
+  </Step>
+  <Step title="Upload">
+    Click **Upload file** in the top right and pick a file from your computer. Large files upload in parallel chunks; the row shows progress and flips to **Ready** when finished.
+  </Step>
+  <Step title="Or let the agent save a file from a project">
+    Inside a chat session, ask the agent: *"Save the cleaned counts table to the library."* The agent confirms with you before the upload runs (see [Sending files from a project to the library](#sending-files-from-a-project-to-the-library) below).
+  </Step>
+</Steps>
+
+## Pulling a library file into a project
+
+You can pull files into a project two ways: with a button in the project Files tab, or by asking the agent in chat.
+
+### From the Files tab
+
+<Steps>
+  <Step title="Open the project">
+    Open the project where you want the file to land.
+  </Step>
+  <Step title="Click From library">
+    In the project **Files** tab, open the upload menu and choose **From library**. A picker lists every file currently in the workspace library.
+  </Step>
+  <Step title="Select and import">
+    Pick the file. Galagos copies it into the project sandbox under the same filename. The row appears in the project's file tree as soon as the copy completes.
+  </Step>
+</Steps>
+
+### By asking the agent
+
+You can describe the file you want in plain English and the agent will browse the library and bring the right one in:
+
+> *"Pull the GRCh38 reference FASTA from the library into this project."*
+>
+> *"Do we have a hg38 panel in the library? If so, import it."*
+>
+> *"List what's in the workspace library."*
+
+The agent decides whether to call up the library based on your phrasing. You do not need to mention library tools by name. Once the file is in the project, the agent treats it like any other input — you can immediately run an analysis against it in the same chat turn.
+
+<Tip>
+  If a file you uploaded recently doesn't show up when the agent lists the library, refresh the page — the library list is fetched fresh on each tool call.
+</Tip>
+
+## Sending files from a project to the library
+
+You can promote a useful project file to the workspace library so other projects (and other members) can reuse it. Same two paths: a button in the Files tab or a request to the agent.
+
+### From the Files tab
+
+<Steps>
+  <Step title="Hover the file in the project file tree">
+    Two small icons appear on the right of the row: an arrow icon for **Send to workspace library** and a trash icon for delete.
+  </Step>
+  <Step title="Click the Send to workspace library icon">
+    A short modal opens with the source path and an editable **Library name** field. The default name is the file's original name; rename it if you want the library entry labelled differently.
+  </Step>
+  <Step title="Confirm">
+    Click **Send to library**. The file uploads in the background; a toast tells you when it's ready. The file now appears in the workspace library and any project in the workspace can pull it in.
+  </Step>
+</Steps>
+
+### By asking the agent
+
+Inside a chat session, ask the agent to save a workspace path to the library:
+
+> *"Save `results/cleaned_counts.csv` to the library so the next project can use it."*
+>
+> *"Promote this annotated VCF to the workspace library, name it `cohort-2026-A.vcf.gz`."*
+
+Because saving to the library makes a file visible to every collaborator in the workspace and counts against the workspace quota, the agent always asks for your confirmation in chat before the upload runs. You see the source path and the library name, and approve or decline with a single click. The upload then runs in the background and the file appears in the library when it's ready.
+
+<Tip>
+  Saving the same name twice does not overwrite — the library keeps both entries, each with its own upload timestamp. Use the library page to delete superseded versions.
+</Tip>
+
+## Who can do what
+
+| Capability | Member | Admin | Owner |
+| --- | :---: | :---: | :---: |
+| Upload files to the library | ✓ | ✓ | ✓ |
+| Pull a library file into a project | ✓ | ✓ | ✓ |
+| Send a project file to the library | ✓ | ✓ | ✓ |
+| Delete files from the library | ✓ | ✓ | ✓ |
+| Ask the agent to use the library | ✓ | ✓ | ✓ |
+
+All roles can read and write the library. Library entries belong to the workspace, not the individual uploader; another member removing an obsolete file is expected behaviour.
+
+## Storage and quotas
+
+The library has its own per-workspace storage cap, separate from each project's sandbox quota:
+
+| Plan | Library storage |
+| --- | --- |
+| Individual | 10 GB |
+| Starter | 25 GB |
+| Professional | 100 GB |
+| Enterprise | Custom |
+
+The library page shows current usage as a progress bar. Imports into a project do not double-count: the library copy stays where it is, and the project gets its own copy that counts against the project's storage quota. See [Credits and storage](/concepts/credits-and-storage) for the per-project numbers.
+
+## Tips
+
+- **Library, not file dump.** Upload curated artifacts and reference data. Use a project sandbox for one-off raw inputs that won't be reused.
+- **Name files so others can find them.** `GRCh38.primary_assembly.genome.fa` beats `genome.fa`. The agent matches on filename when you describe what you want.
+- **Delete superseded versions.** When you publish a new revision, remove the old one. The library does not show "latest" by default; older entries can be picked accidentally.
+- **Ask the agent to inventory before assuming.** If you're not sure whether a reference file is already in the library, ask the agent to list it — faster than switching tabs.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Workspaces" icon="users" href="/concepts/workspaces">
+    Where the library lives, who has access, and how members are managed.
+  </Card>
+  <Card title="Uploading files" icon="upload" href="/analyses/uploading-files">
+    Per-project uploads (separate from the workspace library) and supported formats.
+  </Card>
+  <Card title="Running an analysis" icon="play" href="/analyses/running-an-analysis">
+    How a chat turn flows from prompt to result inside a project sandbox.
+  </Card>
+  <Card title="Credits and storage" icon="database" href="/concepts/credits-and-storage">
+    Per-plan storage limits and how usage is calculated.
+  </Card>
+</CardGroup>

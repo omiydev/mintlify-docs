@@ -39,6 +39,7 @@
             "pages": [
               "concepts/projects",
               "concepts/workspaces",
+              "concepts/library",
               "concepts/skills",
               "concepts/memory",
               "concepts/credits-and-storage"

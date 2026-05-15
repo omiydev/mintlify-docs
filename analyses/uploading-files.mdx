@@ -72,6 +72,10 @@ Pseudonymization means replacing any direct identifiers (such as patient names, 
   </Accordion>
 </AccordionGroup>
 
+## Reusing files across projects
+
+If a file is something more than one project will need — a reference genome, a panel, a curated artifact — upload it to the workspace library instead of into a single project. Any project in the same workspace can then pull a copy in with one click (or by asking the agent), and you can push project results back to the library the same way. See [Workspace library](/concepts/library) for the full workflow.
+
 ## Next steps
 
 <CardGroup cols={2}>
@@ -80,5 +84,8 @@ Pseudonymization means replacing any direct identifiers (such as patient names, 
   </Card>
   <Card title="Supported file formats" icon="file-lines" href="/analyses/supported-file-formats">
     See the full format reference, including notes on compression and tool compatibility.
+  </Card>
+  <Card title="Workspace library" icon="folder-tree" href="/concepts/library">
+    Upload once, reuse across every project. Works from the UI and from chat.
   </Card>
 </CardGroup>
